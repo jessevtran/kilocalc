@@ -1,9 +1,32 @@
 image: node:10.13.0
 
-stages:
-  - test
+cache:
+  paths:
+    - node_modules/
+    - .yarn
 
-test_builds:
+before_script:
+  - yarn config set cache-folder .yarn
+  - yarn install
+
+tests:
+  stage: test
   script:
-    - yarn install
+    - make test
+
+lint:
+  stage: test
+  script:
+    - yarn run lint
+
+pages:
+  stage: deploy
+  script:
     - yarn run build
+    - rm -rf public/
+    - cp --dereference -r build/ public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
