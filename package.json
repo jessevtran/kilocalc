@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "author": "Michael Vessia <michael@vessia.net>",
   "private": true,
-  "homepage": "./",
+  "homepage": "http://kilocalc.com",
   "dependencies": {
     "cross-env": "^5.2.0",
     "react": "^16.8.6",
