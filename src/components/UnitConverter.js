@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import FormGroup from "react-bootstrap/FormGroup";
 import FormControl from "react-bootstrap/FormControl";
-import { kgToLbs, lbsToKg } from "../logic/units";
+import { kgToLbs, lbsToKg, displayWeight } from "../logic/units";
 
 
 const KgInput = () => {
@@ -12,12 +12,11 @@ const KgInput = () => {
   return (
     <div>
       <FormGroup>
-        <Form.Label>Kg to Lbs</Form.Label>
         <FormControl type="number" value={kg} onChange={e => setKg(e.target.value)} />
+        <Form.Label>Kg = </Form.Label>
+        <span>{displayWeight(kgToLbs(kg))}Lbs</span>
       </FormGroup>
 
-      <div>Lbs</div>
-      <div>{kgToLbs(kg)}</div>
     </div>
   );
 };
@@ -29,12 +28,11 @@ const LbsInput = () => {
   return (
     <div>
       <FormGroup>
-        <Form.Label>Lbs to Kg</Form.Label>
         <FormControl type="number" value={lbs} onChange={e => setLbs(e.target.value)} />
+        <Form.Label>Lbs = </Form.Label>
+        <span>{displayWeight(lbsToKg(lbs))}Kg</span>
       </FormGroup>
 
-      <div>Kg</div>
-      <div>{lbsToKg(lbs)}</div>
     </div>
   );
 };
