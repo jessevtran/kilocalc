@@ -14,13 +14,17 @@ const Barbell = ({ weight, unit }) => {
       return <span key={`${plate}${i}`}>{plate},</span>
     });
   };
-  return <div>
-    <FormGroup>
-      <Label>Bar And Collar Weight</Label>
-      <Input type="number" value={barAndCollarWeight} onChange={e => setBarAndCollarWeight(e.target.value)} />
-    </FormGroup>
-    {renderBarLoad()}
-  </div>
+  return (
+    <div>
+      <Form>
+        <FormGroup>
+          <Label for="barAndCollar" >Bar And Collar Weight</Label>
+          <Input id="barAndCollar" type="number" value={barAndCollarWeight} onChange={e => setBarAndCollarWeight(e.target.value)} />
+        </FormGroup>
+      </Form>
+      {renderBarLoad()}
+    </div>
+  );
 };
 
 export default Barbell;
