@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import FormGroup from "react-bootstrap/FormGroup";
-import FormControl from "react-bootstrap/FormControl";
+import { Form, FormGroup, Label, Input } from "reactstrap";
 import { kgToLbs, lbsToKg, displayWeight } from "../logic/units";
 import Barbell from "./Barbell";
 
@@ -12,17 +10,15 @@ const KgInput = () => {
   const lbs = displayWeight(kgToLbs(kg));
 
   return (
-    <div>
-      <FormGroup>
-        <FormControl type="number" value={kg} onChange={e => setKg(e.target.value)} />
-        <Form.Label>Kg = </Form.Label>
-        <span>{lbs}Lbs</span>
-        <div>
-          <Barbell weight={kg} barAndCollarWeight={25} />
-        </div>
-      </FormGroup>
-
-    </div>
+    <FormGroup>
+      <h2>Kilograms to Pounds </h2>
+      <Label for="kgInput">Enter Kilograms</Label>
+      <Input id="kgInput" type="number" value={kg} onChange={e => setKg(e.target.value)} />
+      <div>
+        <div>{lbs}Lbs</div>
+        <Barbell weight={kg} unit="kg" />
+      </div>
+    </FormGroup>
   );
 };
 
@@ -31,25 +27,25 @@ const LbsInput = () => {
   const [lbs, setLbs] = useState(0);
 
   return (
-    <div>
-      <FormGroup>
-        <FormControl type="number" value={lbs} onChange={e => setLbs(e.target.value)} />
-        <Form.Label>Lbs = </Form.Label>
-        <span>{displayWeight(lbsToKg(lbs))}Kg</span>
-        <div>
-          <Barbell weight={lbs} barAndCollarWeight={45} />
-        </div>
-      </FormGroup>
-
-    </div>
+    <FormGroup>
+      <h2>Pounds to Kilograms</h2>
+      <Label for="lbsInput">Enter Pounds</Label>
+      <Input id="lbsInput" type="number" value={lbs} onChange={e => setLbs(e.target.value)} />
+      <div>
+        <div>{displayWeight(lbsToKg(lbs))}Kg</div>
+        <Barbell weight={lbs} unit="lbs" />
+      </div>
+    </FormGroup>
   );
 };
 
 const UnitConverter = () => {
   return <div>
-    <div>Unit Conversion</div>
-    <KgInput />
-    <LbsInput />
+    <h1>Unit Conversion</h1>
+    <Form>
+      <KgInput />
+      <LbsInput />
+    </Form>
   </div>;
 };
 
