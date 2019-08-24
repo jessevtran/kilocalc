@@ -1,6 +1,22 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import { Form, FormGroup, Label, Input } from "reactstrap";
 import { weightToBarLoad } from "../logic/barload";
+import Plate from "./Plate";
+
+const PlateContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  height: 200px;
+  width: 50%;
+  margin: auto;
+
+  // Default styling for the plate text.
+  font-size: 12;
+  font-weight: bold;
+`;
+
 
 const Barbell = ({ weight, unit }) => {
 
@@ -11,7 +27,7 @@ const Barbell = ({ weight, unit }) => {
   const barLoad = weightToBarLoad(weight, plates, barAndCollarWeight);
   const renderBarLoad = () => {
     return barLoad.map((plate, i) => {
-      return <span key={`${plate}${i}`}>{plate},</span>
+      return <Plate key={`${plate}${i}`} weight={plate} />
     });
   };
   return (
@@ -22,7 +38,9 @@ const Barbell = ({ weight, unit }) => {
           <Input id="barAndCollar" type="number" value={barAndCollarWeight} onChange={e => setBarAndCollarWeight(e.target.value)} />
         </FormGroup>
       </Form>
-      {renderBarLoad()}
+      <PlateContainer>
+        {renderBarLoad()}
+      </PlateContainer>
     </div>
   );
 };
