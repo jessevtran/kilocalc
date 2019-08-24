@@ -16,12 +16,35 @@ const WeightInput = () => {
 
   const [barAndCollarWeight, setBarAndCollarWeight] = useState(defaultBarAndCollarWeight(unit));
 
-  const plates = unit === "kg" ? [25, 20, 15, 10, 5, 2.5] : [45, 25, 10, 5, 2.5];
-  const barLoad = weightToBarLoad(weight, plates, barAndCollarWeight);
-
   const updateUnit = unit => {
     setUnit(unit);
     setBarAndCollarWeight(defaultBarAndCollarWeight(unit));
+  };
+
+  const renderBarbells = () => {
+    if (weight === 0) {
+      return null;
+    }
+
+    const getPlates = unit => {
+      return unit === "kg" ? [25, 20, 15, 10, 5, 2.5] : [45, 25, 10, 5, 2.5];
+    };
+
+    const barLoad = weightToBarLoad(weight, getPlates(unit), barAndCollarWeight);
+
+    const convert = unit === "kg" ? kgToLbs : lbsToKg;
+    const otherWeight = displayWeight(convert(weight));
+    const otherUnit = unit === "kg" ? "lbs" : "kg";
+    const otherBarLoad = weightToBarLoad(Math.round(otherWeight), getPlates(otherUnit), Math.round(displayWeight(convert(barAndCollarWeight))));
+    return (
+      <Fragment>
+        <h2>{weight}</h2>
+        <Barbell barLoad={barLoad} weight={weight} unit={unit} />
+        <h2>Actual: {otherWeight}</h2>
+        <h2>Rounded: {Math.round(otherWeight)}</h2>
+        <Barbell barLoad={otherBarLoad} weight={otherWeight} unit={otherUnit} />
+      </Fragment>
+    );
   };
 
   return (
@@ -43,7 +66,7 @@ const WeightInput = () => {
       </FormGroup>
 
       <div>
-        <Barbell barLoad={barLoad} weight={weight} unit={unit} />
+        {renderBarbells()}
       </div>
     </Fragment>
   );
