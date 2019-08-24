@@ -27,7 +27,7 @@ const WeightInput = () => {
     }
 
     const getPlates = unit => {
-      return unit === "kg" ? [25, 20, 15, 10, 5, 2.5] : [45, 25, 10, 5, 2.5];
+      return unit === "kg" ? [25, 20, 15, 10, 5, 2.5, 1.25] : [45, 25, 10, 5, 2.5];
     };
 
     const getSmallestPlate = unit => {
@@ -43,7 +43,7 @@ const WeightInput = () => {
     const barLoad = weightToBarLoad(weight, getPlates(unit), barAndCollarWeight);
 
     const convert = unit === "kg" ? kgToLbs : lbsToKg;
-    const otherWeight = displayWeight(convert(weight));
+    const otherWeight = plateRound(convert(weight));
     const otherUnit = unit === "kg" ? "lbs" : "kg";
     const otherBarLoad = weightToBarLoad(plateRound(otherWeight, otherUnit), getPlates(otherUnit), plateRound(displayWeight(convert(barAndCollarWeight)), otherUnit));
     return (
