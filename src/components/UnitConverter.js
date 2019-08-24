@@ -43,15 +43,15 @@ const WeightInput = () => {
     const barLoad = weightToBarLoad(weight, getPlates(unit), barAndCollarWeight);
 
     const convert = unit === "kg" ? kgToLbs : lbsToKg;
-    const otherWeight = plateRound(convert(weight));
     const otherUnit = unit === "kg" ? "lbs" : "kg";
+    const otherWeight = plateRound(convert(weight), unit);
     const otherBarLoad = weightToBarLoad(plateRound(otherWeight, otherUnit), getPlates(otherUnit), plateRound(displayWeight(convert(barAndCollarWeight)), otherUnit));
     return (
       <Fragment>
-        <h2>{weight}</h2>
+        <h2>{weight}{unit}</h2>
         <Barbell barLoad={barLoad} weight={weight} unit={unit} />
-        <h2>Actual: {otherWeight}</h2>
-        <h2>Rounded: {plateRound(otherWeight, otherUnit)}</h2>
+        <h2>Actual: {displayWeight(convert(weight))}{otherUnit}</h2>
+        <h2>Rounded: {plateRound(otherWeight, otherUnit)}{otherUnit}</h2>
         <Barbell barLoad={otherBarLoad} weight={otherWeight} unit={otherUnit} />
       </Fragment>
     );
