@@ -12,9 +12,9 @@ const DefaultPlate = styled.div`
 `;
 
 const StyledPlate = styled(DefaultPlate)`
-  height: ${props => getHeight(props.weight)};
-  background-color: ${props => getColor(props.weight).plateColor};
-  color: ${props => getColor(props.weight).textColor};
+  height: ${props => getHeight(props.weight, props.unit)};
+  background-color: ${props => getColor(props.weight, props.unit).plateColor};
+  color: ${props => getColor(props.weight, props.unit).textColor};
 `;
 
 const getHeight = (weight, unit) => {
@@ -122,7 +122,7 @@ const getColor = (weight, unit) => {
 
 const Plate = ({ weight, unit}) => {
   return (
-    <StyledPlate weight={weight}>{weight}</StyledPlate>
+    <StyledPlate unit={unit} weight={weight}>{weight}</StyledPlate>
   );
 };
 

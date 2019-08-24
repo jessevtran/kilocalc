@@ -1,52 +1,60 @@
-import React, { useState } from "react";
-import { Form, FormGroup, Label, Input } from "reactstrap";
+import React, { Fragment, useState } from "react";
+import { Form, FormGroup, ButtonGroup, Button, Label, Input } from "reactstrap";
 import { kgToLbs, lbsToKg, displayWeight } from "../logic/units";
 import Barbell from "./Barbell";
+import { weightToBarLoad } from "../logic/barload";
 
 
-const KgInput = () => {
+const WeightInput = () => {
 
-  const [kg, setKg] = useState(0);
-  const lbs = displayWeight(kgToLbs(kg));
+  const [weight, setWeight] = useState(0);
+  const [unit, setUnit] = useState("kg");
 
-  return (
-    <FormGroup>
-      <h2>Kilograms to Pounds </h2>
-      <Label for="kgInput">Enter Kilograms</Label>
-      <Input id="kgInput" type="number" value={kg} onChange={e => setKg(e.target.value)} />
-      <div>
-        <div>{lbs}Lbs</div>
-        <Barbell weight={kg} unit="kg" />
-      </div>
-    </FormGroup>
-  );
-};
+  const defaultBarAndCollarWeight = unit => {
+    return unit === "kg" ? 25 : 45;
+  };
 
-const LbsInput = () => {
+  const [barAndCollarWeight, setBarAndCollarWeight] = useState(defaultBarAndCollarWeight(unit));
 
-  const [lbs, setLbs] = useState(0);
+  const plates = unit === "kg" ? [25, 20, 15, 10, 5, 2.5] : [45, 25, 10, 5, 2.5];
+  const barLoad = weightToBarLoad(weight, plates, barAndCollarWeight);
+
+  const updateUnit = unit => {
+    setUnit(unit);
+    setBarAndCollarWeight(defaultBarAndCollarWeight(unit));
+  };
 
   return (
-    <FormGroup>
-      <h2>Pounds to Kilograms</h2>
-      <Label for="lbsInput">Enter Pounds</Label>
-      <Input id="lbsInput" type="number" value={lbs} onChange={e => setLbs(e.target.value)} />
+    <Fragment>
+      <FormGroup>
+        <Label for="weightInput">Weight</Label>
+        <Input id="weightInput" type="number" onChange={e => setWeight(e.target.value)} />
+        <Label for="unitInput">Unit</Label>
+      </FormGroup>
+
+      <ButtonGroup>
+        <Button color="primary" onClick={() => updateUnit("kg")} active={unit === "kg"}>kg</Button>
+        <Button color="primary" onClick={() => updateUnit("lbs")} active={unit === "lbs"}>lbs</Button>
+      </ButtonGroup>
+
+      <FormGroup>
+        <Label for="barAndCollar" >Bar And Collar Weight</Label>
+        <Input id="barAndCollar" type="number" value={barAndCollarWeight} onChange={e => setBarAndCollarWeight(e.target.value)} />
+      </FormGroup>
+
       <div>
-        <div>{displayWeight(lbsToKg(lbs))}Kg</div>
-        <Barbell weight={lbs} unit="lbs" />
+        <Barbell barLoad={barLoad} weight={weight} unit={unit} />
       </div>
-    </FormGroup>
+    </Fragment>
   );
 };
 
 const UnitConverter = () => {
-  return <div>
-    <h1>Unit Conversion</h1>
+  return (
     <Form>
-      <KgInput />
-      <LbsInput />
+      <WeightInput />
     </Form>
-  </div>;
+  );
 };
 
 export default UnitConverter;
