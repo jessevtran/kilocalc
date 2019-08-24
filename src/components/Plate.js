@@ -45,8 +45,33 @@ const getHeight = (weight, unit) => {
     return height;
   };
 
-  //const heights = (unit === "kg") ? kgHeights : lbsHeights;
-  return `${kgHeights(weight)}px`;
+  const lbsHeights = weight => {
+    let height;
+    switch (weight) {
+        // 45 is default maxHeight
+      case 25: 
+        height = maxHeight * 0.9;
+        break;
+      case 10: 
+        height = maxHeight * 0.8;
+        break;
+      case 5:
+        height = maxHeight * 0.7;
+        break;
+      case 2.5:
+        height = maxHeight * 0.6;
+        break;
+      case 1.25:
+        height = maxHeight * 0.5;
+        break;
+      default: 
+        height = maxHeight;
+    }
+    return height;
+  };
+
+  const heights = (unit === "kg") ? kgHeights : lbsHeights;
+  return `${heights(weight)}px`;
 };
 
 const getColor = (weight, unit) => {
@@ -72,6 +97,10 @@ const getColor = (weight, unit) => {
     }
   };
 
+  const lbsColors = weight => {
+    return "gray";
+  };
+
   const textColors = plateColor => {
     const darkColors = ["black", "blue"];
     if (darkColors.includes(plateColor)) {
@@ -81,8 +110,8 @@ const getColor = (weight, unit) => {
     }
   };
 
-  //const colors = (unit === "kg") ? kgColors : lbsColors;
-  const plateColor = kgColors(weight);
+  const plateColors = (unit === "kg") ? kgColors : lbsColors;
+  const plateColor = plateColors(weight);
   const textColor = textColors(plateColor);
 
   return {
