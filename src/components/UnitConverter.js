@@ -1,16 +1,10 @@
 import React, { Fragment, useState } from "react";
-import {
-  Form,
-  FormGroup,
-  ButtonGroup,
-  Button,
-  Input,
-  Row,
-  Col,
-  Card,
-  CardBody
-} from "reactstrap";
+import { Form, Row, Col, Card, CardBody } from "reactstrap";
 import BarbellsView from "./BarbellsView";
+import WeightInput from "./WeightInput";
+import UnitInput from "./UnitInput";
+import RoundingInput from "./RoundingInput";
+import AvailablePlatesInput from "./AvailablePlatesInput";
 
 const Inputs = ({
   weight,
@@ -21,7 +15,11 @@ const Inputs = ({
   setRounding,
   barAndCollarWeight,
   setBarAndCollarWeight,
-  defaultBarAndCollarWeight
+  defaultBarAndCollarWeight,
+  availablePlatesKg,
+  setAvailablePlatesKg,
+  availablePlatesLbs,
+  setAvailablePlatesLbs
 }) => {
   return (
     <Form>
@@ -48,106 +46,13 @@ const Inputs = ({
           <RoundingInput rounding={rounding} setRounding={setRounding} />
         </Col>
       </Row>
+      <AvailablePlatesInput
+        availablePlatesKg={availablePlatesKg}
+        setAvailablePlatesKg={setAvailablePlatesKg}
+        availablePlatesLbs={availablePlatesLbs}
+        setAvailablePlatesLbs={setAvailablePlatesLbs}
+      />
     </Form>
-  );
-};
-
-const RoundingInput = ({ rounding, setRounding }) => {
-  return (
-    <Fragment>
-      <h4>Rounding</h4>
-      <ButtonGroup>
-        <Button
-          color="primary"
-          onClick={() => setRounding("nearest")}
-          active={rounding === "nearest"}
-        >
-          nearest
-        </Button>
-        <Button
-          color="primary"
-          onClick={() => setRounding("up")}
-          active={rounding === "up"}
-        >
-          up
-        </Button>
-        <Button
-          color="primary"
-          onClick={() => setRounding("down")}
-          active={rounding === "down"}
-        >
-          down
-        </Button>
-      </ButtonGroup>
-    </Fragment>
-  );
-};
-
-const UnitInput = ({
-  unit,
-  setUnit,
-  setBarAndCollarWeight,
-  defaultBarAndCollarWeight
-}) => {
-  const updateUnit = unit => {
-    setUnit(unit);
-    setBarAndCollarWeight(defaultBarAndCollarWeight(unit));
-  };
-
-  return (
-    <Col>
-      <h4>Unit</h4>
-      <ButtonGroup>
-        <Button
-          color="primary"
-          onClick={() => updateUnit("kg")}
-          active={unit === "kg"}
-        >
-          kg
-        </Button>
-        <Button
-          color="primary"
-          onClick={() => updateUnit("lbs")}
-          active={unit === "lbs"}
-        >
-          lbs
-        </Button>
-      </ButtonGroup>
-    </Col>
-  );
-};
-const WeightInput = ({
-  unit,
-  weight,
-  setWeight,
-  barAndCollarWeight,
-  setBarAndCollarWeight
-}) => {
-  return (
-    <FormGroup>
-      <Row>
-        <Col sm="6">
-          <h4>Total Weight</h4>
-          <Input
-            step=".01"
-            id="weightInput"
-            type="number"
-            onChange={e => setWeight(e.target.value)}
-          />
-        </Col>
-
-        <Col sm="6">
-          <h4>Bar And Collar Weight</h4>
-          <Input
-            step=".01"
-            id="barAndCollar"
-            type="number"
-            value={barAndCollarWeight}
-            onChange={e => setBarAndCollarWeight(e.target.value)}
-          />
-        </Col>
-      </Row>
-    </FormGroup>
   );
 };
 
@@ -156,11 +61,24 @@ const UnitConverter = () => {
     return unit === "kg" ? 25 : 45;
   };
 
+  const defaultPlates = unit => {
+    return unit === "kg"
+      ? [25, 20, 15, 10, 5, 2.5, 1.25]
+      : [45, 25, 10, 5, 2.5];
+  };
+
   const [weight, setWeight] = useState(0);
   const [unit, setUnit] = useState("kg");
   const [rounding, setRounding] = useState("nearest");
   const [barAndCollarWeight, setBarAndCollarWeight] = useState(
     defaultBarAndCollarWeight(unit)
+  );
+
+  const [availablePlatesKg, setAvailablePlatesKg] = useState(
+    defaultPlates("kg")
+  );
+  const [availablePlatesLbs, setAvailablePlatesLbs] = useState(
+    defaultPlates("lbs")
   );
 
   return (
@@ -177,6 +95,10 @@ const UnitConverter = () => {
             barAndCollarWeight={barAndCollarWeight}
             setBarAndCollarWeight={setBarAndCollarWeight}
             defaultBarAndCollarWeight={defaultBarAndCollarWeight}
+            availablePlatesKg={availablePlatesKg}
+            setAvailablePlatesKg={setAvailablePlatesKg}
+            availablePlatesLbs={availablePlatesLbs}
+            setAvailablePlatesLbs={setAvailablePlatesLbs}
           />
         </CardBody>
       </Card>
@@ -187,6 +109,8 @@ const UnitConverter = () => {
             barAndCollarWeight={barAndCollarWeight}
             unit={unit}
             rounding={rounding}
+            availablePlatesKg={availablePlatesKg}
+            availablePlatesLbs={availablePlatesLbs}
           />
         </CardBody>
       </Card>

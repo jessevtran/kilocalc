@@ -1,16 +1,23 @@
 import React from "react";
 import Barbell from "./Barbell";
-import {  Container, Row, Col } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import { weightToBarLoad } from "../logic/barload";
 import { kgToLbs, lbsToKg, displayWeight } from "../logic/units";
 
-const BarbellsView = ({ weight, barAndCollarWeight, unit, rounding }) => {
+const BarbellsView = ({
+  weight,
+  barAndCollarWeight,
+  unit,
+  rounding,
+  availablePlatesKg,
+  availablePlatesLbs
+}) => {
   if (weight === 0) {
     return null;
   }
 
   const getPlates = unit => {
-    return unit === "kg" ? [25, 20, 15, 10, 5, 2.5, 1.25] : [45, 25, 10, 5, 2.5];
+    return unit === "kg" ? availablePlatesKg : availablePlatesLbs;
   };
 
   const getSmallestPlate = unit => {
@@ -28,7 +35,7 @@ const BarbellsView = ({ weight, barAndCollarWeight, unit, rounding }) => {
     } else {
       roundingFn = Math.round;
     }
-    return roundingFn(weight/roundTo) * roundTo;
+    return roundingFn(weight / roundTo) * roundTo;
   };
 
   const barLoad = weightToBarLoad(weight, getPlates(unit), barAndCollarWeight);
@@ -36,18 +43,41 @@ const BarbellsView = ({ weight, barAndCollarWeight, unit, rounding }) => {
   const convert = unit === "kg" ? kgToLbs : lbsToKg;
   const otherUnit = unit === "kg" ? "lbs" : "kg";
   const otherWeight = convert(plateRound(weight), otherUnit);
-  const otherBarLoad = weightToBarLoad(plateRound(otherWeight, otherUnit), getPlates(otherUnit), displayWeight(plateRound(convert(barAndCollarWeight)), otherUnit));
+  const otherBarLoad = weightToBarLoad(
+    plateRound(otherWeight, otherUnit),
+    getPlates(otherUnit),
+    displayWeight(plateRound(convert(barAndCollarWeight)), otherUnit)
+  );
   return (
     <Container>
       <Row>
         <Col sm="6">
-          <h2>{weight}{unit}</h2>
-          <Barbell barLoad={barLoad} weight={weight} unit={unit} platesAvailable={getPlates(unit)}/>
+          <h2>
+            {weight}
+            {unit}
+          </h2>
+          <Barbell
+            barLoad={barLoad}
+            weight={weight}
+            unit={unit}
+            platesAvailable={getPlates(unit)}
+          />
         </Col>
         <Col sm="6">
-          <h2>{displayWeight(convert(weight))}{otherUnit}</h2>
-          <h2>Rounded ({rounding}): {plateRound(otherWeight, otherUnit)}{otherUnit}</h2>
-          <Barbell barLoad={otherBarLoad} weight={otherWeight} unit={otherUnit} platesAvailable={getPlates(otherUnit)}/>
+          <h2>
+            {displayWeight(convert(weight))}
+            {otherUnit}
+          </h2>
+          <h2>
+            Rounded ({rounding}): {plateRound(otherWeight, otherUnit)}
+            {otherUnit}
+          </h2>
+          <Barbell
+            barLoad={otherBarLoad}
+            weight={otherWeight}
+            unit={otherUnit}
+            platesAvailable={getPlates(otherUnit)}
+          />
         </Col>
       </Row>
     </Container>

@@ -23,11 +23,11 @@ const getHeight = (weight, unit) => {
   const kgHeights = weight => {
     let height;
     switch (weight) {
-        // 25 and 20 are default maxHeight
-      case 15: 
+      // 25 and 20 are default maxHeight
+      case 15:
         height = maxHeight * 0.9;
         break;
-      case 10: 
+      case 10:
         height = maxHeight * 0.8;
         break;
       case 5:
@@ -39,7 +39,16 @@ const getHeight = (weight, unit) => {
       case 1.25:
         height = maxHeight * 0.5;
         break;
-      default: 
+      case 1:
+        height = maxHeight * 0.4;
+        break;
+      case 0.5:
+        height = maxHeight * 0.3;
+        break;
+      case 0.25:
+        height = maxHeight * 0.2;
+        break;
+      default:
         height = maxHeight;
     }
     return height;
@@ -48,11 +57,11 @@ const getHeight = (weight, unit) => {
   const lbsHeights = weight => {
     let height;
     switch (weight) {
-        // 45 is default maxHeight
-      case 25: 
+      // 45 is default maxHeight
+      case 25:
         height = maxHeight * 0.9;
         break;
-      case 10: 
+      case 10:
         height = maxHeight * 0.8;
         break;
       case 5:
@@ -64,27 +73,26 @@ const getHeight = (weight, unit) => {
       case 1.25:
         height = maxHeight * 0.5;
         break;
-      default: 
+      default:
         height = maxHeight;
     }
     return height;
   };
 
-  const heights = (unit === "kg") ? kgHeights : lbsHeights;
+  const heights = unit === "kg" ? kgHeights : lbsHeights;
   return `${heights(weight)}px`;
 };
 
 const getColor = (weight, unit) => {
-
   const kgColors = weight => {
     switch (weight) {
       case 25:
         return "red";
       case 20:
         return "blue";
-      case 15: 
+      case 15:
         return "yellow";
-      case 10: 
+      case 10:
         return "green";
       case 5:
         return "white";
@@ -92,7 +100,7 @@ const getColor = (weight, unit) => {
         return "black";
       case 1.25:
         return "gray";
-      default: 
+      default:
         return "black";
     }
   };
@@ -110,7 +118,7 @@ const getColor = (weight, unit) => {
     }
   };
 
-  const plateColors = (unit === "kg") ? kgColors : lbsColors;
+  const plateColors = unit === "kg" ? kgColors : lbsColors;
   const plateColor = plateColors(weight);
   const textColor = textColors(plateColor);
 
@@ -120,9 +128,11 @@ const getColor = (weight, unit) => {
   };
 };
 
-const Plate = ({ weight, unit}) => {
+const Plate = ({ weight, unit }) => {
   return (
-    <StyledPlate unit={unit} weight={weight}>{weight}</StyledPlate>
+    <StyledPlate unit={unit} weight={weight}>
+      {weight}
+    </StyledPlate>
   );
 };
 
