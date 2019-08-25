@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { Form, FormGroup, ButtonGroup, Button, Input, Container, Row, Col, Card, CardBody } from "reactstrap";
+import { Form, FormGroup, ButtonGroup, Button, Input, Row, Col, Card, CardBody } from "reactstrap";
 import BarbellsView from "./BarbellsView";
 
 const Inputs = ({ weight, setWeight, unit, setUnit, rounding, setRounding, barAndCollarWeight, setBarAndCollarWeight, defaultBarAndCollarWeight }) => {
@@ -72,13 +72,17 @@ const WeightInput = ({ unit, weight, setWeight, barAndCollarWeight, setBarAndCol
 
   return (
     <FormGroup>
-      <Container>
-        <h4>Total Weight</h4>
-        <Input step=".01" id="weightInput" type="number" onChange={e => setWeight(e.target.value)} />
+      <Row>
+        <Col sm="6">
+          <h4>Total Weight</h4>
+          <Input step=".01" id="weightInput" type="number" onChange={e => setWeight(e.target.value)} />
+        </Col>
 
-        <h4>Bar And Collar Weight</h4>
-        <Input step=".01" id="barAndCollar" type="number" value={barAndCollarWeight} onChange={e => setBarAndCollarWeight(e.target.value)} />
-      </Container>
+        <Col sm="6">
+          <h4>Bar And Collar Weight</h4>
+          <Input step=".01" id="barAndCollar" type="number" value={barAndCollarWeight} onChange={e => setBarAndCollarWeight(e.target.value)} />
+        </Col>
+      </Row>
     </FormGroup>
   );
 };
@@ -97,28 +101,28 @@ const UnitConverter = () => {
     <Fragment>
       <Card>
         <CardBody>
-        <Inputs 
-          weight={weight}
-          setWeight={setWeight}
-          unit={unit}
-          setUnit={setUnit}
-          rounding={rounding}
-          setRounding={setRounding}
-          barAndCollarWeight={barAndCollarWeight}
-          setBarAndCollarWeight={setBarAndCollarWeight}
-          defaultBarAndCollarWeight={defaultBarAndCollarWeight}
-        />
-      </CardBody>
+          <Inputs 
+            weight={weight}
+            setWeight={setWeight}
+            unit={unit}
+            setUnit={setUnit}
+            rounding={rounding}
+            setRounding={setRounding}
+            barAndCollarWeight={barAndCollarWeight}
+            setBarAndCollarWeight={setBarAndCollarWeight}
+            defaultBarAndCollarWeight={defaultBarAndCollarWeight}
+          />
+        </CardBody>
       </Card>
       <Card>
         <CardBody>
-        <BarbellsView
-          weight={weight}
-          barAndCollarWeight={barAndCollarWeight}
-          unit={unit}
-          rounding={rounding}
-        />
-      </CardBody>
+          <BarbellsView
+            weight={weight}
+            barAndCollarWeight={barAndCollarWeight}
+            unit={unit}
+            rounding={rounding}
+          />
+        </CardBody>
       </Card>
     </Fragment>
   );
