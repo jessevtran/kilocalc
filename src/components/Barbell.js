@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Form, FormGroup, Label, Input } from "reactstrap";
 import Plate from "./Plate";
 
 const PlateContainer = styled.div`

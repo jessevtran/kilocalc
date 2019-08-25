@@ -44,8 +44,8 @@ const WeightInput = () => {
 
     const convert = unit === "kg" ? kgToLbs : lbsToKg;
     const otherUnit = unit === "kg" ? "lbs" : "kg";
-    const otherWeight = plateRound(convert(weight), unit);
-    const otherBarLoad = weightToBarLoad(plateRound(otherWeight, otherUnit), getPlates(otherUnit), plateRound(displayWeight(convert(barAndCollarWeight)), otherUnit));
+    const otherWeight = convert(plateRound(weight), otherUnit);
+    const otherBarLoad = weightToBarLoad(plateRound(otherWeight, otherUnit), getPlates(otherUnit), displayWeight(plateRound(convert(barAndCollarWeight)), otherUnit));
     return (
       <Fragment>
         <h2>{weight}{unit}</h2>
