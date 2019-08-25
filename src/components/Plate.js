@@ -73,6 +73,15 @@ const getHeight = (weight, unit) => {
       case 1.25:
         height = maxHeight * 0.5;
         break;
+      case 1:
+        height = maxHeight * 0.4;
+        break;
+      case 0.5:
+        height = maxHeight * 0.3;
+        break;
+      case 0.25:
+        height = maxHeight * 0.2;
+        break;
       default:
         height = maxHeight;
     }
