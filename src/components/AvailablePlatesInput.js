@@ -54,11 +54,10 @@ const AvailablePlatesInput = ({
 
   return (
     <Fragment>
-      <div>
-        <Button color="primary" onClick={() => setIsOpen(!isOpen)}>
-          Set Available Plates
-        </Button>
-      </div>
+      <h4>Set Available Plates</h4>
+      <Button color="primary" onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? "Hide" : "Show"}
+      </Button>
       <div>
         <Collapse isOpen={isOpen}>
           <Card>
@@ -70,6 +69,8 @@ const AvailablePlatesInput = ({
                 <KgButton weight={15} />
                 <KgButton weight={10} />
                 <KgButton weight={5} />
+              </ButtonGroup>
+              <ButtonGroup>
                 <KgButton weight={2.5} />
                 <KgButton weight={1.25} />
                 <KgButton weight={1} />
@@ -85,6 +86,8 @@ const AvailablePlatesInput = ({
                 <LbsButton weight={25} />
                 <LbsButton weight={10} />
                 <LbsButton weight={5} />
+              </ButtonGroup>
+              <ButtonGroup>
                 <LbsButton weight={2.5} />
                 <LbsButton weight={1.25} />
                 <LbsButton weight={1} />
