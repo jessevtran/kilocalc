@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
 import Plate from "./Plate";
 
@@ -16,11 +16,16 @@ const PlateContainer = styled.div`
 `;
 
 
-const Barbell = ({ weight, unit, barLoad }) => {
+const Barbell = ({ weight, unit, barLoad, platesAvailable }) => {
 
   const renderBarLoad = () => {
     return barLoad.map((plate, i) => {
-      return <Plate key={`${plate}${i}`} weight={plate} unit={unit} />
+      return (
+        <Fragment>
+          {!platesAvailable.includes(plate) && <span>+</span>}
+          <Plate key={`${plate}${i}`} weight={plate} unit={unit} />
+        </Fragment>
+      );
     });
   };
   return (

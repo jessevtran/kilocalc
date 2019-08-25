@@ -60,12 +60,12 @@ const WeightInput = () => {
         <Row>
           <Col sm="6">
             <h2>{weight}{unit}</h2>
-            <Barbell barLoad={barLoad} weight={weight} unit={unit} />
+            <Barbell barLoad={barLoad} weight={weight} unit={unit} platesAvailable={getPlates(unit)}/>
           </Col>
           <Col sm="6">
             <h2>{displayWeight(convert(weight))}{otherUnit}</h2>
             <h2>Rounded ({rounding}): {plateRound(otherWeight, otherUnit)}{otherUnit}</h2>
-            <Barbell barLoad={otherBarLoad} weight={otherWeight} unit={otherUnit} />
+            <Barbell barLoad={otherBarLoad} weight={otherWeight} unit={otherUnit} platesAvailable={getPlates(otherUnit)}/>
           </Col>
         </Row>
       </Container>

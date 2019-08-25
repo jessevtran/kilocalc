@@ -6,7 +6,7 @@ const DefaultPlate = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 30px;
+  min-width: 30px;
   border-style: solid;
   border-width: 1px;
 `;
@@ -93,7 +93,7 @@ const getColor = (weight, unit) => {
       case 1.25:
         return "gray";
       default: 
-        return "purple";
+        return "black";
     }
   };
 
