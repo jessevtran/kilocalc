@@ -15,15 +15,22 @@ const PlateContainer = styled.div`
   font-weight: bold;
 `;
 
+const Bar = styled.div`
+  width: 50px;
+  color: gray;
+  background-color: gray;
+  height: 15;
+`;
+
 
 const Barbell = ({ weight, unit, barLoad, platesAvailable }) => {
 
   const renderBarLoad = () => {
     return barLoad.map((plate, i) => {
       return (
-        <Fragment>
+        <Fragment key={`${plate}${i}`}>
           {!platesAvailable.includes(plate) && <span>+</span>}
-          <Plate key={`${plate}${i}`} weight={plate} unit={unit} />
+          <Plate weight={plate} unit={unit} />
         </Fragment>
       );
     });
@@ -31,6 +38,7 @@ const Barbell = ({ weight, unit, barLoad, platesAvailable }) => {
   return (
     <div>
       <PlateContainer>
+        <Bar>Bar</Bar>
         {renderBarLoad()}
       </PlateContainer>
     </div>
