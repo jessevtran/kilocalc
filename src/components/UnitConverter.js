@@ -1,58 +1,38 @@
 import React, { Fragment, useState } from "react";
-import { Form, FormGroup, ButtonGroup, Button, Input, Container, Row, Col } from "reactstrap";
+import { Form, FormGroup, ButtonGroup, Button, Input, Container, Row, Col, Card, CardBody } from "reactstrap";
 import BarbellsView from "./BarbellsView";
 
-const Inputs = () => {
-
-  const defaultBarAndCollarWeight = unit => {
-    return unit === "kg" ? 25 : 45;
-  };
-
-  const [weight, setWeight] = useState(0);
-  const [unit, setUnit] = useState("kg");
-  const [rounding, setRounding] = useState("nearest");
-  const [barAndCollarWeight, setBarAndCollarWeight] = useState(defaultBarAndCollarWeight(unit));
+const Inputs = ({ weight, setWeight, unit, setUnit, rounding, setRounding, barAndCollarWeight, setBarAndCollarWeight, defaultBarAndCollarWeight }) => {
 
   return (
-    <Fragment>
-      <Form>
-        <WeightInput
-          unit={unit}
-          setUnit={setUnit}
-          rounding={rounding}
-          setRounding={setRounding}
-          weight={weight}
-          setWeight={setWeight}
-          barAndCollarWeight={barAndCollarWeight}
-          setBarAndCollarWeight={setBarAndCollarWeight}
-        />
-        <Row>
-          <Col>
-            <UnitInput
-              unit={unit}
-              setUnit={setUnit}
-              setBarAndCollarWeight={setBarAndCollarWeight}
-              defaultBarAndCollarWeight={defaultBarAndCollarWeight}
-            />
-          </Col>
-          <Col>
-            <RoundingInput
-              rounding={rounding}
-              setRounding={setRounding}
-            />
-          </Col>
-        </Row>
-      </Form>
-
-      <hr/>
-
-      <BarbellsView
-        weight={weight}
-        barAndCollarWeight={barAndCollarWeight}
+    <Form>
+      <WeightInput
         unit={unit}
+        setUnit={setUnit}
         rounding={rounding}
+        setRounding={setRounding}
+        weight={weight}
+        setWeight={setWeight}
+        barAndCollarWeight={barAndCollarWeight}
+        setBarAndCollarWeight={setBarAndCollarWeight}
       />
-    </Fragment>
+      <Row>
+        <Col>
+          <UnitInput
+            unit={unit}
+            setUnit={setUnit}
+            setBarAndCollarWeight={setBarAndCollarWeight}
+            defaultBarAndCollarWeight={defaultBarAndCollarWeight}
+          />
+        </Col>
+        <Col>
+          <RoundingInput
+            rounding={rounding}
+            setRounding={setRounding}
+          />
+        </Col>
+      </Row>
+    </Form>
   );
 };
 
@@ -104,8 +84,43 @@ const WeightInput = ({ unit, weight, setWeight, barAndCollarWeight, setBarAndCol
 };
 
 const UnitConverter = () => {
+  const defaultBarAndCollarWeight = unit => {
+    return unit === "kg" ? 25 : 45;
+  };
+
+  const [weight, setWeight] = useState(0);
+  const [unit, setUnit] = useState("kg");
+  const [rounding, setRounding] = useState("nearest");
+  const [barAndCollarWeight, setBarAndCollarWeight] = useState(defaultBarAndCollarWeight(unit));
+
   return (
-    <Inputs />
+    <Fragment>
+      <Card>
+        <CardBody>
+        <Inputs 
+          weight={weight}
+          setWeight={setWeight}
+          unit={unit}
+          setUnit={setUnit}
+          rounding={rounding}
+          setRounding={setRounding}
+          barAndCollarWeight={barAndCollarWeight}
+          setBarAndCollarWeight={setBarAndCollarWeight}
+          defaultBarAndCollarWeight={defaultBarAndCollarWeight}
+        />
+      </CardBody>
+      </Card>
+      <Card>
+        <CardBody>
+        <BarbellsView
+          weight={weight}
+          barAndCollarWeight={barAndCollarWeight}
+          unit={unit}
+          rounding={rounding}
+        />
+      </CardBody>
+      </Card>
+    </Fragment>
   );
 };
 
