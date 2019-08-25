@@ -15,7 +15,7 @@ export const weightToBarLoad = (weight, plates, barAndCollarWeight) => {
   }
 
   if (sideWeight > 0) {
-    barLoad.push(sideWeight);
+    barLoad.push(sideWeight.toFixed(3));
   }
   return barLoad;
 };
