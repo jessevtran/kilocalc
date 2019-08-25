@@ -77,10 +77,10 @@ const WeightInput = () => {
       <FormGroup>
         <Container>
           <h4>Total Weight</h4>
-          <Input id="weightInput" type="number" onChange={e => setWeight(e.target.value)} />
+          <Input step=".01" id="weightInput" type="number" onChange={e => setWeight(e.target.value)} />
 
           <h4>Bar And Collar Weight</h4>
-          <Input id="barAndCollar" type="number" value={barAndCollarWeight} onChange={e => setBarAndCollarWeight(e.target.value)} />
+          <Input step=".01" id="barAndCollar" type="number" value={barAndCollarWeight} onChange={e => setBarAndCollarWeight(e.target.value)} />
 
 
           <Row>
