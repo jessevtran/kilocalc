@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { Form, FormGroup, ButtonGroup, Button, Label, Input } from "reactstrap";
+import { Form, FormGroup, ButtonGroup, Button, Input, Container, Row, Col } from "reactstrap";
 import { kgToLbs, lbsToKg, displayWeight } from "../logic/units";
 import Barbell from "./Barbell";
 import { weightToBarLoad } from "../logic/barload";
@@ -9,6 +9,7 @@ const WeightInput = () => {
 
   const [weight, setWeight] = useState(0);
   const [unit, setUnit] = useState("kg");
+  const [rounding, setRounding] = useState("nearest");
 
   const defaultBarAndCollarWeight = unit => {
     return unit === "kg" ? 25 : 45;
@@ -37,7 +38,15 @@ const WeightInput = () => {
 
     const plateRound = (weight, unit) => {
       const roundTo = getSmallestPlate(unit) * 2;
-      return Math.ceil(weight/roundTo) * roundTo;
+      let roundingFn;
+      if (rounding === "up") {
+        roundingFn = Math.ceil;
+      } else if (rounding === "down") {
+        roundingFn = Math.floor;
+      } else {
+        roundingFn = Math.round;
+      }
+      return roundingFn(weight/roundTo) * roundTo;
     };
 
     const barLoad = weightToBarLoad(weight, getPlates(unit), barAndCollarWeight);
@@ -47,32 +56,52 @@ const WeightInput = () => {
     const otherWeight = convert(plateRound(weight), otherUnit);
     const otherBarLoad = weightToBarLoad(plateRound(otherWeight, otherUnit), getPlates(otherUnit), displayWeight(plateRound(convert(barAndCollarWeight)), otherUnit));
     return (
-      <Fragment>
-        <h2>{weight}{unit}</h2>
-        <Barbell barLoad={barLoad} weight={weight} unit={unit} />
-        <h2>Actual: {displayWeight(convert(weight))}{otherUnit}</h2>
-        <h2>Rounded: {plateRound(otherWeight, otherUnit)}{otherUnit}</h2>
-        <Barbell barLoad={otherBarLoad} weight={otherWeight} unit={otherUnit} />
-      </Fragment>
+      <Container>
+        <Row>
+          <Col sm="6">
+            <h2>{weight}{unit}</h2>
+            <Barbell barLoad={barLoad} weight={weight} unit={unit} />
+          </Col>
+          <Col sm="6">
+            <h2>{displayWeight(convert(weight))}{otherUnit}</h2>
+            <h2>Rounded ({rounding}): {plateRound(otherWeight, otherUnit)}{otherUnit}</h2>
+            <Barbell barLoad={otherBarLoad} weight={otherWeight} unit={otherUnit} />
+          </Col>
+        </Row>
+      </Container>
     );
   };
 
   return (
     <Fragment>
       <FormGroup>
-        <Label for="weightInput">Weight</Label>
-        <Input id="weightInput" type="number" onChange={e => setWeight(e.target.value)} />
-        <Label for="unitInput">Unit</Label>
-      </FormGroup>
+        <Container>
+          <h4>Total Weight</h4>
+          <Input id="weightInput" type="number" onChange={e => setWeight(e.target.value)} />
 
-      <ButtonGroup>
-        <Button color="primary" onClick={() => updateUnit("kg")} active={unit === "kg"}>kg</Button>
-        <Button color="primary" onClick={() => updateUnit("lbs")} active={unit === "lbs"}>lbs</Button>
-      </ButtonGroup>
+          <h4>Bar And Collar Weight</h4>
+          <Input id="barAndCollar" type="number" value={barAndCollarWeight} onChange={e => setBarAndCollarWeight(e.target.value)} />
 
-      <FormGroup>
-        <Label for="barAndCollar" >Bar And Collar Weight</Label>
-        <Input id="barAndCollar" type="number" value={barAndCollarWeight} onChange={e => setBarAndCollarWeight(e.target.value)} />
+
+          <Row>
+            <Col>
+              <h4>Unit</h4>
+              <ButtonGroup>
+                <Button color="primary" onClick={() => updateUnit("kg")} active={unit === "kg"}>kg</Button>
+                <Button color="primary" onClick={() => updateUnit("lbs")} active={unit === "lbs"}>lbs</Button>
+              </ButtonGroup>
+            </Col>
+
+            <Col>
+              <h4>Rounding</h4>
+              <ButtonGroup>
+                <Button color="primary" onClick={() => setRounding("nearest")} active={rounding === "nearest"}>nearest</Button>
+                <Button color="primary" onClick={() => setRounding("up")} active={rounding === "up"}>up</Button>
+                <Button color="primary" onClick={() => setRounding("down")} active={rounding === "down"}>down</Button>
+              </ButtonGroup>
+            </Col>
+          </Row>
+        </Container>
       </FormGroup>
 
       <div>
