@@ -13,10 +13,10 @@ const AvailablePlatesInput = ({
     let newPlates = [...plates];
     if (newPlates.includes(newPlate)) {
       newPlates = newPlates.filter(plate => plate !== newPlate);
-      setAvailablePlatesKg(newPlates);
+      update(newPlates);
     } else {
       newPlates.push(newPlate);
-      setAvailablePlatesKg(
+      update(
         newPlates.sort((a, b) => {
           return b - a;
         })
@@ -24,7 +24,7 @@ const AvailablePlatesInput = ({
     }
   };
 
-  const KiloButton = ({ weight }) => {
+  const KgButton = ({ weight }) => {
     return (
       <Button
         color="secondary"
@@ -32,6 +32,20 @@ const AvailablePlatesInput = ({
           togglePlate(availablePlatesKg, weight, setAvailablePlatesKg)
         }
         active={availablePlatesKg.includes(weight)}
+      >
+        {weight}
+      </Button>
+    );
+  };
+
+  const LbsButton = ({ weight }) => {
+    return (
+      <Button
+        color="secondary"
+        onClick={() =>
+          togglePlate(availablePlatesLbs, weight, setAvailablePlatesLbs)
+        }
+        active={availablePlatesLbs.includes(weight)}
       >
         {weight}
       </Button>
@@ -48,18 +62,34 @@ const AvailablePlatesInput = ({
       <div>
         <Collapse isOpen={isOpen}>
           <Card>
+            <div>Kg</div>
             <CardBody>
               <ButtonGroup>
-                <KiloButton weight={25} />
-                <KiloButton weight={20} />
-                <KiloButton weight={15} />
-                <KiloButton weight={10} />
-                <KiloButton weight={5} />
-                <KiloButton weight={2.5} />
-                <KiloButton weight={1.25} />
-                <KiloButton weight={1} />
-                <KiloButton weight={0.5} />
-                <KiloButton weight={0.25} />
+                <KgButton weight={25} />
+                <KgButton weight={20} />
+                <KgButton weight={15} />
+                <KgButton weight={10} />
+                <KgButton weight={5} />
+                <KgButton weight={2.5} />
+                <KgButton weight={1.25} />
+                <KgButton weight={1} />
+                <KgButton weight={0.5} />
+                <KgButton weight={0.25} />
+              </ButtonGroup>
+            </CardBody>
+            <div>Lbs</div>
+            <CardBody>
+              <ButtonGroup>
+                <LbsButton weight={45} />
+                <LbsButton weight={35} />
+                <LbsButton weight={25} />
+                <LbsButton weight={10} />
+                <LbsButton weight={5} />
+                <LbsButton weight={2.5} />
+                <LbsButton weight={1.25} />
+                <LbsButton weight={1} />
+                <LbsButton weight={0.5} />
+                <LbsButton weight={0.25} />
               </ButtonGroup>
             </CardBody>
           </Card>
