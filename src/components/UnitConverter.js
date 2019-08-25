@@ -1,9 +1,28 @@
 import React, { Fragment, useState } from "react";
-import { Form, FormGroup, ButtonGroup, Button, Input, Row, Col, Card, CardBody } from "reactstrap";
+import {
+  Form,
+  FormGroup,
+  ButtonGroup,
+  Button,
+  Input,
+  Row,
+  Col,
+  Card,
+  CardBody
+} from "reactstrap";
 import BarbellsView from "./BarbellsView";
 
-const Inputs = ({ weight, setWeight, unit, setUnit, rounding, setRounding, barAndCollarWeight, setBarAndCollarWeight, defaultBarAndCollarWeight }) => {
-
+const Inputs = ({
+  weight,
+  setWeight,
+  unit,
+  setUnit,
+  rounding,
+  setRounding,
+  barAndCollarWeight,
+  setBarAndCollarWeight,
+  defaultBarAndCollarWeight
+}) => {
   return (
     <Form>
       <WeightInput
@@ -26,10 +45,7 @@ const Inputs = ({ weight, setWeight, unit, setUnit, rounding, setRounding, barAn
           />
         </Col>
         <Col>
-          <RoundingInput
-            rounding={rounding}
-            setRounding={setRounding}
-          />
+          <RoundingInput rounding={rounding} setRounding={setRounding} />
         </Col>
       </Row>
     </Form>
@@ -37,21 +53,42 @@ const Inputs = ({ weight, setWeight, unit, setUnit, rounding, setRounding, barAn
 };
 
 const RoundingInput = ({ rounding, setRounding }) => {
-
   return (
     <Fragment>
       <h4>Rounding</h4>
       <ButtonGroup>
-        <Button color="primary" onClick={() => setRounding("nearest")} active={rounding === "nearest"}>nearest</Button>
-        <Button color="primary" onClick={() => setRounding("up")} active={rounding === "up"}>up</Button>
-        <Button color="primary" onClick={() => setRounding("down")} active={rounding === "down"}>down</Button>
+        <Button
+          color="primary"
+          onClick={() => setRounding("nearest")}
+          active={rounding === "nearest"}
+        >
+          nearest
+        </Button>
+        <Button
+          color="primary"
+          onClick={() => setRounding("up")}
+          active={rounding === "up"}
+        >
+          up
+        </Button>
+        <Button
+          color="primary"
+          onClick={() => setRounding("down")}
+          active={rounding === "down"}
+        >
+          down
+        </Button>
       </ButtonGroup>
     </Fragment>
   );
 };
 
-const UnitInput = ({ unit, setUnit, setBarAndCollarWeight, defaultBarAndCollarWeight }) => {
-
+const UnitInput = ({
+  unit,
+  setUnit,
+  setBarAndCollarWeight,
+  defaultBarAndCollarWeight
+}) => {
   const updateUnit = unit => {
     setUnit(unit);
     setBarAndCollarWeight(defaultBarAndCollarWeight(unit));
@@ -61,26 +98,53 @@ const UnitInput = ({ unit, setUnit, setBarAndCollarWeight, defaultBarAndCollarWe
     <Col>
       <h4>Unit</h4>
       <ButtonGroup>
-        <Button color="primary" onClick={() => updateUnit("kg")} active={unit === "kg"}>kg</Button>
-        <Button color="primary" onClick={() => updateUnit("lbs")} active={unit === "lbs"}>lbs</Button>
+        <Button
+          color="primary"
+          onClick={() => updateUnit("kg")}
+          active={unit === "kg"}
+        >
+          kg
+        </Button>
+        <Button
+          color="primary"
+          onClick={() => updateUnit("lbs")}
+          active={unit === "lbs"}
+        >
+          lbs
+        </Button>
       </ButtonGroup>
     </Col>
   );
 };
-const WeightInput = ({ unit, weight, setWeight, barAndCollarWeight, setBarAndCollarWeight }) => {
-
-
+const WeightInput = ({
+  unit,
+  weight,
+  setWeight,
+  barAndCollarWeight,
+  setBarAndCollarWeight
+}) => {
   return (
     <FormGroup>
       <Row>
         <Col sm="6">
           <h4>Total Weight</h4>
-          <Input step=".01" id="weightInput" type="number" onChange={e => setWeight(e.target.value)} />
+          <Input
+            step=".01"
+            id="weightInput"
+            type="number"
+            onChange={e => setWeight(e.target.value)}
+          />
         </Col>
 
         <Col sm="6">
           <h4>Bar And Collar Weight</h4>
-          <Input step=".01" id="barAndCollar" type="number" value={barAndCollarWeight} onChange={e => setBarAndCollarWeight(e.target.value)} />
+          <Input
+            step=".01"
+            id="barAndCollar"
+            type="number"
+            value={barAndCollarWeight}
+            onChange={e => setBarAndCollarWeight(e.target.value)}
+          />
         </Col>
       </Row>
     </FormGroup>
@@ -95,13 +159,15 @@ const UnitConverter = () => {
   const [weight, setWeight] = useState(0);
   const [unit, setUnit] = useState("kg");
   const [rounding, setRounding] = useState("nearest");
-  const [barAndCollarWeight, setBarAndCollarWeight] = useState(defaultBarAndCollarWeight(unit));
+  const [barAndCollarWeight, setBarAndCollarWeight] = useState(
+    defaultBarAndCollarWeight(unit)
+  );
 
   return (
     <Fragment>
       <Card>
         <CardBody>
-          <Inputs 
+          <Inputs
             weight={weight}
             setWeight={setWeight}
             unit={unit}
