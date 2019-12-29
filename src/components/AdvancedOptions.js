@@ -1,13 +1,5 @@
 import React, { useState, Fragment } from "react";
-import {
-  Row,
-  Col,
-  Collapse,
-  Card,
-  CardBody,
-  Button,
-  ButtonGroup
-} from "reactstrap";
+import { Row, Col, Collapse, Card, CardBody, Button } from "reactstrap";
 import RoundingInput from "./RoundingInput";
 import AvailablePlatesInput from "./AvailablePlatesInput";
 
