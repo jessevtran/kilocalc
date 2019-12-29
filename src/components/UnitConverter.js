@@ -16,6 +16,8 @@ const Inputs = ({
   setAvailablePlatesKg,
   availablePlatesLbs,
   setAvailablePlatesLbs,
+  barWeight,
+  setBarWeight,
   collarWeight,
   setCollarWeight
 }) => {
@@ -28,6 +30,8 @@ const Inputs = ({
         setRounding={setRounding}
         weight={weight}
         setWeight={setWeight}
+        barWeight={barWeight}
+        setBarWeight={setBarWeight}
         collarWeight={collarWeight}
         setCollarWeight={setCollarWeight}
       />
@@ -45,6 +49,7 @@ const UnitConverter = () => {
   const [weight, setWeight] = useState(0);
   const [unit, setUnit] = useState("kg");
   const [rounding, setRounding] = useState("nearest");
+  const [barWeight, setBarWeight] = useState(20);
   const [collarWeight, setCollarWeight] = useState(2.5);
 
   const [availablePlatesKg, setAvailablePlatesKg] = useState(
@@ -69,6 +74,8 @@ const UnitConverter = () => {
             setAvailablePlatesKg={setAvailablePlatesKg}
             availablePlatesLbs={availablePlatesLbs}
             setAvailablePlatesLbs={setAvailablePlatesLbs}
+            barWeight={barWeight}
+            setBarWeight={setBarWeight}
             collarWeight={collarWeight}
             setCollarWeight={setCollarWeight}
           />
@@ -88,6 +95,7 @@ const UnitConverter = () => {
             weight={weight}
             unit={unit}
             rounding={rounding}
+            barWeight={barWeight}
             collarWeight={collarWeight}
             availablePlatesKg={availablePlatesKg}
             availablePlatesLbs={availablePlatesLbs}

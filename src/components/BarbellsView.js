@@ -8,6 +8,7 @@ const BarbellsView = ({
   weight,
   unit,
   rounding,
+  barWeight,
   collarWeight,
   availablePlatesKg,
   availablePlatesLbs
@@ -38,8 +39,12 @@ const BarbellsView = ({
     return roundingFn(weight / roundTo) * roundTo;
   };
 
-  // TODO: Add bar weight
-  const barLoad = weightToBarLoad(weight, getPlates(unit), collarWeight);
+  const barLoad = weightToBarLoad(
+    weight,
+    getPlates(unit),
+    barWeight,
+    collarWeight
+  );
 
   const convert = unit === "kg" ? kgToLbs : lbsToKg;
   const otherUnit = unit === "kg" ? "lbs" : "kg";
@@ -47,6 +52,7 @@ const BarbellsView = ({
   const otherBarLoad = weightToBarLoad(
     plateRound(otherWeight, otherUnit),
     getPlates(otherUnit),
+    displayWeight(plateRound(convert(barWeight)), otherUnit),
     displayWeight(plateRound(convert(collarWeight)), otherUnit)
   );
   return (

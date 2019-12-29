@@ -9,6 +9,7 @@ const WeightInput = ({
   weight,
   setWeight,
   collarWeight,
+  setBarWeight,
   setCollarWeight
 }) => {
   return (
@@ -29,6 +30,7 @@ const WeightInput = ({
           <UnitInput
             unit={unit}
             setUnit={setUnit}
+            setBarWeight={setBarWeight}
             setCollarWeight={setCollarWeight}
           />
         </Col>
