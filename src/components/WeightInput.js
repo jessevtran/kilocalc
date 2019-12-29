@@ -1,34 +1,42 @@
 import React from "react";
 import { FormGroup, Input, Row, Col } from "reactstrap";
+import UnitInput from "./UnitInput";
+import CollarsInput from "./CollarsInput";
 
 const WeightInput = ({
   unit,
+  setUnit,
   weight,
   setWeight,
-  barAndCollarWeight,
-  setBarAndCollarWeight
+  collarWeight,
+  setCollarWeight
 }) => {
   return (
     <FormGroup>
       <Row>
-        <Col sm="6">
+        <Col>
           <h4>Total Weight</h4>
           <Input
-            step=".01"
+            step=".25"
             id="weightInput"
             type="number"
             onChange={e => setWeight(e.target.value)}
           />
         </Col>
-
-        <Col sm="6">
-          <h4>Bar And Collar Weight</h4>
-          <Input
-            step=".01"
-            id="barAndCollar"
-            type="number"
-            value={barAndCollarWeight}
-            onChange={e => setBarAndCollarWeight(e.target.value)}
+      </Row>
+      <Row>
+        <Col xs="6">
+          <UnitInput
+            unit={unit}
+            setUnit={setUnit}
+            setCollarWeight={setCollarWeight}
+          />
+        </Col>
+        <Col xs="6">
+          <CollarsInput
+            unit={unit}
+            collarWeight={collarWeight}
+            setCollarWeight={setCollarWeight}
           />
         </Col>
       </Row>

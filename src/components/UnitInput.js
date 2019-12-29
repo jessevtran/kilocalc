@@ -1,15 +1,9 @@
 import React from "react";
 import { ButtonGroup, Button, Col } from "reactstrap";
 
-const UnitInput = ({
-  unit,
-  setUnit,
-  setBarAndCollarWeight,
-  defaultBarAndCollarWeight
-}) => {
+const UnitInput = ({ unit, setUnit, setCollarWeight }) => {
   const updateUnit = unit => {
     setUnit(unit);
-    setBarAndCollarWeight(defaultBarAndCollarWeight(unit));
   };
 
   return (
@@ -18,14 +12,22 @@ const UnitInput = ({
       <ButtonGroup>
         <Button
           color="primary"
-          onClick={() => updateUnit("kg")}
+          onClick={() => {
+            updateUnit("kg");
+            // Default kilo loading to use collars
+            setCollarWeight(2.5);
+          }}
           active={unit === "kg"}
         >
           kg
         </Button>
         <Button
           color="primary"
-          onClick={() => updateUnit("lbs")}
+          onClick={() => {
+            updateUnit("lbs");
+            // When loading pounds, we rarely use collars, so default to 0
+            setCollarWeight(0);
+          }}
           active={unit === "lbs"}
         >
           lbs

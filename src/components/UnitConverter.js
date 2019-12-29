@@ -1,8 +1,7 @@
 import React, { Fragment, useState } from "react";
-import { Form, Row, Col, Card, CardBody } from "reactstrap";
+import { Form, Card, CardBody } from "reactstrap";
 import BarbellsView from "./BarbellsView";
 import WeightInput from "./WeightInput";
-import UnitInput from "./UnitInput";
 import AdvancedOptions from "./AdvancedOptions";
 
 const Inputs = ({
@@ -13,12 +12,12 @@ const Inputs = ({
   rounding,
   setRounding,
   barAndCollarWeight,
-  setBarAndCollarWeight,
-  defaultBarAndCollarWeight,
   availablePlatesKg,
   setAvailablePlatesKg,
   availablePlatesLbs,
-  setAvailablePlatesLbs
+  setAvailablePlatesLbs,
+  collarWeight,
+  setCollarWeight
 }) => {
   return (
     <Form>
@@ -29,28 +28,14 @@ const Inputs = ({
         setRounding={setRounding}
         weight={weight}
         setWeight={setWeight}
-        barAndCollarWeight={barAndCollarWeight}
-        setBarAndCollarWeight={setBarAndCollarWeight}
+        collarWeight={collarWeight}
+        setCollarWeight={setCollarWeight}
       />
-      <Row>
-        <Col>
-          <UnitInput
-            unit={unit}
-            setUnit={setUnit}
-            setBarAndCollarWeight={setBarAndCollarWeight}
-            defaultBarAndCollarWeight={defaultBarAndCollarWeight}
-          />
-        </Col>
-      </Row>
     </Form>
   );
 };
 
 const UnitConverter = () => {
-  const defaultBarAndCollarWeight = unit => {
-    return unit === "kg" ? 25 : 45;
-  };
-
   const defaultPlates = unit => {
     return unit === "kg"
       ? [25, 20, 15, 10, 5, 2.5, 1.25]
@@ -60,9 +45,7 @@ const UnitConverter = () => {
   const [weight, setWeight] = useState(0);
   const [unit, setUnit] = useState("kg");
   const [rounding, setRounding] = useState("nearest");
-  const [barAndCollarWeight, setBarAndCollarWeight] = useState(
-    defaultBarAndCollarWeight(unit)
-  );
+  const [collarWeight, setCollarWeight] = useState(2.5);
 
   const [availablePlatesKg, setAvailablePlatesKg] = useState(
     defaultPlates("kg")
@@ -82,13 +65,12 @@ const UnitConverter = () => {
             setUnit={setUnit}
             rounding={rounding}
             setRounding={setRounding}
-            barAndCollarWeight={barAndCollarWeight}
-            setBarAndCollarWeight={setBarAndCollarWeight}
-            defaultBarAndCollarWeight={defaultBarAndCollarWeight}
             availablePlatesKg={availablePlatesKg}
             setAvailablePlatesKg={setAvailablePlatesKg}
             availablePlatesLbs={availablePlatesLbs}
             setAvailablePlatesLbs={setAvailablePlatesLbs}
+            collarWeight={collarWeight}
+            setCollarWeight={setCollarWeight}
           />
           <AdvancedOptions
             rounding={rounding}
@@ -104,7 +86,6 @@ const UnitConverter = () => {
         <CardBody>
           <BarbellsView
             weight={weight}
-            barAndCollarWeight={barAndCollarWeight}
             unit={unit}
             rounding={rounding}
             availablePlatesKg={availablePlatesKg}
