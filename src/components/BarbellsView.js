@@ -6,9 +6,9 @@ import { kgToLbs, lbsToKg, displayWeight } from "../logic/units";
 
 const BarbellsView = ({
   weight,
-  barAndCollarWeight,
   unit,
   rounding,
+  collarWeight,
   availablePlatesKg,
   availablePlatesLbs
 }) => {
@@ -38,7 +38,8 @@ const BarbellsView = ({
     return roundingFn(weight / roundTo) * roundTo;
   };
 
-  const barLoad = weightToBarLoad(weight, getPlates(unit), barAndCollarWeight);
+  // TODO: Add bar weight
+  const barLoad = weightToBarLoad(weight, getPlates(unit), collarWeight);
 
   const convert = unit === "kg" ? kgToLbs : lbsToKg;
   const otherUnit = unit === "kg" ? "lbs" : "kg";
@@ -46,7 +47,7 @@ const BarbellsView = ({
   const otherBarLoad = weightToBarLoad(
     plateRound(otherWeight, otherUnit),
     getPlates(otherUnit),
-    displayWeight(plateRound(convert(barAndCollarWeight)), otherUnit)
+    displayWeight(plateRound(convert(collarWeight)), otherUnit)
   );
   return (
     <Container>

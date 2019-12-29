@@ -88,6 +88,7 @@ const UnitConverter = () => {
             weight={weight}
             unit={unit}
             rounding={rounding}
+            collarWeight={collarWeight}
             availablePlatesKg={availablePlatesKg}
             availablePlatesLbs={availablePlatesLbs}
           />
