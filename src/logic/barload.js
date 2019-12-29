@@ -1,10 +1,12 @@
+import { displayWeight } from "./units";
 // Given a weight return an array of plates representing one side of the bar
 export const weightToBarLoad = (weight, plates, barWeight, collarWeight) => {
   // The plates that will go on one side of the bar
   let barLoad = [];
 
+  const barAndCollarWeight = displayWeight(barWeight + collarWeight * 2);
   // Amount of weight to go on one side of the bar
-  let sideWeight = (weight - (barWeight + collarWeight * 2)) / 2;
+  let sideWeight = (weight - barAndCollarWeight) / 2;
 
   for (let i = 0; i < plates.length; i++) {
     let plateWeight = plates[i];

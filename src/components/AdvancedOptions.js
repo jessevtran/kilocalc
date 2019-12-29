@@ -18,7 +18,7 @@ const AdvancedOptions = ({
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Fragment>
-      <Button color="primary" onClick={() => setIsOpen(!isOpen)}>
+      <Button color="secondary" onClick={() => setIsOpen(!isOpen)}>
         {isOpen ? "Hide Advanced Options" : "Show Advanced Options"}
       </Button>
       <Collapse isOpen={isOpen}>
@@ -26,16 +26,16 @@ const AdvancedOptions = ({
           <CardBody>
             <Row>
               <Col>
-                <RoundingInput rounding={rounding} setRounding={setRounding} />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
                 <BarWeightInput
                   unit={unit}
                   barWeight={barWeight}
                   setBarWeight={setBarWeight}
                 />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <RoundingInput rounding={rounding} setRounding={setRounding} />
               </Col>
             </Row>
             <Row>

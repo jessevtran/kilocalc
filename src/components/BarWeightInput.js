@@ -10,7 +10,6 @@ const BarWeightInput = ({ unit, barWeight, setBarWeight }) => {
         id="barWeightInput"
         type="number"
         onChange={e => setBarWeight(Number(e.target.value))}
-        value={barWeight}
       />
     </Col>
   );

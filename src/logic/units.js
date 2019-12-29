@@ -9,3 +9,16 @@ export const lbsToKg = lbs => {
 export const displayWeight = weight => {
   return weight.toFixed(2).replace(".00", "");
 };
+
+export const plateRound = (weight, unit, smallestPlate, rounding) => {
+  const roundTo = smallestPlate * 2;
+  let roundingFn;
+  if (rounding === "up") {
+    roundingFn = Math.ceil;
+  } else if (rounding === "down") {
+    roundingFn = Math.floor;
+  } else {
+    roundingFn = Math.round;
+  }
+  return roundingFn(weight / roundTo) * roundTo;
+};

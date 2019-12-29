@@ -54,9 +54,10 @@ const AvailablePlatesInput = ({
 
   return (
     <Fragment>
+      <h4>Configure Available Plates</h4>
       <div>
         <Button color="primary" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? "Hide Available Plates" : "Show Available Plates"}
+          {isOpen ? "Hide Available" : "Show Available"}
         </Button>
       </div>
       <div>

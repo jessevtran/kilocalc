@@ -2,7 +2,7 @@ import React from "react";
 import Barbell from "./Barbell";
 import { Container, Row, Col } from "reactstrap";
 import { weightToBarLoad } from "../logic/barload";
-import { kgToLbs, lbsToKg, displayWeight } from "../logic/units";
+import { kgToLbs, lbsToKg, displayWeight, plateRound } from "../logic/units";
 
 const BarbellsView = ({
   weight,
@@ -26,19 +26,6 @@ const BarbellsView = ({
     return plates[plates.length - 1];
   };
 
-  const plateRound = (weight, unit) => {
-    const roundTo = getSmallestPlate(unit) * 2;
-    let roundingFn;
-    if (rounding === "up") {
-      roundingFn = Math.ceil;
-    } else if (rounding === "down") {
-      roundingFn = Math.floor;
-    } else {
-      roundingFn = Math.round;
-    }
-    return roundingFn(weight / roundTo) * roundTo;
-  };
-
   const barLoad = weightToBarLoad(
     weight,
     getPlates(unit),
@@ -46,21 +33,24 @@ const BarbellsView = ({
     collarWeight
   );
 
+  const smallestPlate = getSmallestPlate(unit);
   const convert = unit === "kg" ? kgToLbs : lbsToKg;
   const otherUnit = unit === "kg" ? "lbs" : "kg";
-  const otherWeight = convert(plateRound(weight), otherUnit);
+  const otherWeight = convert(
+    plateRound(weight),
+    otherUnit,
+    smallestPlate,
+    rounding
+  );
   const otherBarLoad = weightToBarLoad(
-    plateRound(otherWeight, otherUnit),
+    plateRound(otherWeight, otherUnit, smallestPlate, rounding),
     getPlates(otherUnit),
-    displayWeight(plateRound(convert(barWeight)), otherUnit),
-    displayWeight(plateRound(convert(collarWeight)), otherUnit)
+    convert(barWeight),
+    convert(collarWeight)
   );
   return (
     <Container>
       <Row>
-        <div>BarWeight: {barWeight}</div>
-        <div>CollarWeight: {collarWeight}</div>
-        <div>TotalWeight: {weight}</div>
         <Col sm="6">
           <h2>
             {weight}
@@ -79,7 +69,8 @@ const BarbellsView = ({
             {otherUnit}
           </h2>
           <h2>
-            Rounded ({rounding}): {plateRound(otherWeight, otherUnit)}
+            Rounded ({rounding}):{" "}
+            {plateRound(otherWeight, otherUnit, smallestPlate, rounding)}
             {otherUnit}
           </h2>
           <Barbell
