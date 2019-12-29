@@ -2,7 +2,7 @@ import React from "react";
 import { ButtonGroup, Button, Col } from "reactstrap";
 import { kgToLbs, displayWeight } from "../logic/units";
 
-const CollarsInput = ({ unit, collarWeight, setCollarWeight }) => {
+const CollarWeightInput = ({ unit, collarWeight, setCollarWeight }) => {
   return (
     <Col>
       <h4>Collars</h4>
@@ -26,4 +26,4 @@ const CollarsInput = ({ unit, collarWeight, setCollarWeight }) => {
   );
 };
 
-export default CollarsInput;
+export default CollarWeightInput;

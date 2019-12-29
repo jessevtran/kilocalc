@@ -58,6 +58,9 @@ const BarbellsView = ({
   return (
     <Container>
       <Row>
+        <div>BarWeight: {barWeight}</div>
+        <div>CollarWeight: {collarWeight}</div>
+        <div>TotalWeight: {weight}</div>
         <Col sm="6">
           <h2>
             {weight}

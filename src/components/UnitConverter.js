@@ -86,6 +86,9 @@ const UnitConverter = () => {
             setAvailablePlatesKg={setAvailablePlatesKg}
             availablePlatesLbs={availablePlatesLbs}
             setAvailablePlatesLbs={setAvailablePlatesLbs}
+            unit={unit}
+            barWeight={barWeight}
+            setBarWeight={setBarWeight}
           />
         </CardBody>
       </Card>
