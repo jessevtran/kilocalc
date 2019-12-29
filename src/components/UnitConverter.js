@@ -3,8 +3,7 @@ import { Form, Row, Col, Card, CardBody } from "reactstrap";
 import BarbellsView from "./BarbellsView";
 import WeightInput from "./WeightInput";
 import UnitInput from "./UnitInput";
-import RoundingInput from "./RoundingInput";
-import AvailablePlatesInput from "./AvailablePlatesInput";
+import AdvancedOptions from "./AdvancedOptions";
 
 const Inputs = ({
   weight,
@@ -42,16 +41,7 @@ const Inputs = ({
             defaultBarAndCollarWeight={defaultBarAndCollarWeight}
           />
         </Col>
-        <Col>
-          <RoundingInput rounding={rounding} setRounding={setRounding} />
-        </Col>
       </Row>
-      <AvailablePlatesInput
-        availablePlatesKg={availablePlatesKg}
-        setAvailablePlatesKg={setAvailablePlatesKg}
-        availablePlatesLbs={availablePlatesLbs}
-        setAvailablePlatesLbs={setAvailablePlatesLbs}
-      />
     </Form>
   );
 };
@@ -95,6 +85,14 @@ const UnitConverter = () => {
             barAndCollarWeight={barAndCollarWeight}
             setBarAndCollarWeight={setBarAndCollarWeight}
             defaultBarAndCollarWeight={defaultBarAndCollarWeight}
+            availablePlatesKg={availablePlatesKg}
+            setAvailablePlatesKg={setAvailablePlatesKg}
+            availablePlatesLbs={availablePlatesLbs}
+            setAvailablePlatesLbs={setAvailablePlatesLbs}
+          />
+          <AdvancedOptions
+            rounding={rounding}
+            setRounding={setRounding}
             availablePlatesKg={availablePlatesKg}
             setAvailablePlatesKg={setAvailablePlatesKg}
             availablePlatesLbs={availablePlatesLbs}

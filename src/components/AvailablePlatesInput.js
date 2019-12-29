@@ -54,10 +54,11 @@ const AvailablePlatesInput = ({
 
   return (
     <Fragment>
-      <h4>Set Available Plates</h4>
-      <Button color="primary" onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? "Hide" : "Show"}
-      </Button>
+      <div>
+        <Button color="primary" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? "Hide Available Plates" : "Show Available Plates"}
+        </Button>
+      </div>
       <div>
         <Collapse isOpen={isOpen}>
           <Card>
