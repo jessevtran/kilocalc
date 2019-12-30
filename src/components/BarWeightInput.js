@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Input } from "reactstrap";
 import BarAndCollarContext from "../contexts/BarAndCollarContext";
 import UnitContext from "../contexts/UnitContext";
-import styled from "styled-components";
 
 const BarWeightInput = () => {
   const { unit } = useContext(UnitContext);
