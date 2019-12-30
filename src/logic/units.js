@@ -10,7 +10,7 @@ export const displayWeight = weight => {
   return weight.toFixed(2).replace(".00", "");
 };
 
-export const plateRound = (weight, unit, smallestPlate, rounding) => {
+export const plateRound = (weight, smallestPlate, rounding) => {
   const roundTo = smallestPlate * 2;
   let roundingFn;
   if (rounding === "up") {

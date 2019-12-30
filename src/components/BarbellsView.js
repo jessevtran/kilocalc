@@ -37,18 +37,33 @@ const BarbellsView = ({ availablePlatesKg, availablePlatesLbs }) => {
   const smallestPlate = getSmallestPlate(unit);
   const convert = unit === "kg" ? kgToLbs : lbsToKg;
   const otherUnit = unit === "kg" ? "lbs" : "kg";
-  const otherWeight = convert(
-    plateRound(totalWeight),
-    otherUnit,
-    smallestPlate,
+  const otherSmallestPlate = getSmallestPlate(otherUnit);
+  const otherWeight = plateRound(
+    convert(totalWeight),
+    otherSmallestPlate,
     rounding
   );
+
+  // Treat 20kg and 45lb bar as the same for the "other" view
+  // Not exactly correct, but it solves visual problems and is what most people are looking for
+  let otherBarWeight;
+  if (otherUnit === "lbs" && barWeight === 20) {
+    otherBarWeight = 45;
+  } else if (otherUnit === "kg" && barWeight === 45) {
+    otherBarWeight = 20;
+  } else {
+    otherBarWeight = convert(barWeight);
+  }
+  const otherCollarWeight =
+    otherUnit === "lbs" ? 0 : displayWeight(kgToLbs(collarWeight));
+
   const otherBarLoad = weightToBarLoad(
-    plateRound(otherWeight, otherUnit, smallestPlate, rounding),
+    otherWeight,
     getPlates(otherUnit),
-    convert(barWeight),
-    convert(collarWeight)
+    otherBarWeight,
+    otherCollarWeight
   );
+
   return (
     <Container>
       <Row>
@@ -71,9 +86,7 @@ const BarbellsView = ({ availablePlatesKg, availablePlatesLbs }) => {
           </h2>
           <h2>
             <span>Rounded ({rounding}):</span>
-            <span>
-              {plateRound(otherWeight, otherUnit, smallestPlate, rounding)}
-            </span>
+            <span>{plateRound(otherWeight, smallestPlate, rounding)}</span>
             <span>{otherUnit}</span>
           </h2>
           <Barbell

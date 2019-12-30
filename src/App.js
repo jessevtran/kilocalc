@@ -7,7 +7,6 @@ const Body = styled.div`
   padding: 1rem;
 `;
 const Footer = styled.footer`
-  position: absolute;
   bottom: 0;
   height: 5%;
   width: 100%;
