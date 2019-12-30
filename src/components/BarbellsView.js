@@ -5,9 +5,9 @@ import { weightToBarLoad } from "../logic/barload";
 import { kgToLbs, lbsToKg, displayWeight, plateRound } from "../logic/units";
 import TotalWeightContext from "../contexts/TotalWeightContext";
 import UnitContext from "../contexts/UnitContext";
+import RoundingContext from "../contexts/RoundingContext";
 
 const BarbellsView = ({
-  rounding,
   barWeight,
   collarWeight,
   availablePlatesKg,
@@ -15,6 +15,7 @@ const BarbellsView = ({
 }) => {
   const { totalWeight } = useContext(TotalWeightContext);
   const { unit } = useContext(UnitContext);
+  const { rounding } = useContext(RoundingContext);
 
   if (totalWeight === 0) {
     return null;
@@ -68,13 +69,15 @@ const BarbellsView = ({
         </Col>
         <Col sm="6">
           <h2>
-            {displayWeight(convert(totalWeight))}
-            {otherUnit}
+            <span>{displayWeight(convert(totalWeight))}</span>
+            <span>{otherUnit}</span>
           </h2>
           <h2>
-            Rounded ({rounding}):{" "}
-            {plateRound(otherWeight, otherUnit, smallestPlate, rounding)}
-            {otherUnit}
+            <span>Rounded ({rounding}):</span>
+            <span>
+              {plateRound(otherWeight, otherUnit, smallestPlate, rounding)}
+            </span>
+            <span>{otherUnit}</span>
           </h2>
           <Barbell
             barLoad={otherBarLoad}

@@ -1,7 +1,9 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { ButtonGroup, Button } from "reactstrap";
+import RoundingContext from "../contexts/RoundingContext";
 
-const RoundingInput = ({ rounding, setRounding }) => {
+const RoundingInput = () => {
+  const { rounding, setRounding } = useContext(RoundingContext);
   return (
     <Fragment>
       <h4>Rounding</h4>

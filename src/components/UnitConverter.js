@@ -5,6 +5,7 @@ import WeightInput from "./WeightInput";
 import AdvancedOptions from "./AdvancedOptions";
 import TotalWeightContext from "../contexts/TotalWeightContext";
 import UnitContext from "../contexts/UnitContext";
+import RoundingContext from "../contexts/RoundingContext";
 
 const UnitConverter = () => {
   const defaultPlates = unit => {
@@ -42,31 +43,33 @@ const UnitConverter = () => {
                 setUnit: setUnit
               }}
             >
-              <WeightInput
-                rounding={rounding}
-                setRounding={setRounding}
-                barWeight={barWeight}
-                setBarWeight={setBarWeight}
-                collarWeight={collarWeight}
-                setCollarWeight={setCollarWeight}
-              />
-              <BarbellsView
-                rounding={rounding}
-                barWeight={barWeight}
-                collarWeight={collarWeight}
-                availablePlatesKg={availablePlatesKg}
-                availablePlatesLbs={availablePlatesLbs}
-              />
-              <AdvancedOptions
-                rounding={rounding}
-                setRounding={setRounding}
-                availablePlatesKg={availablePlatesKg}
-                setAvailablePlatesKg={setAvailablePlatesKg}
-                availablePlatesLbs={availablePlatesLbs}
-                setAvailablePlatesLbs={setAvailablePlatesLbs}
-                barWeight={barWeight}
-                setBarWeight={setBarWeight}
-              />
+              <RoundingContext.Provider
+                value={{
+                  rounding: rounding,
+                  setRounding: setRounding
+                }}
+              >
+                <WeightInput
+                  barWeight={barWeight}
+                  setBarWeight={setBarWeight}
+                  collarWeight={collarWeight}
+                  setCollarWeight={setCollarWeight}
+                />
+                <BarbellsView
+                  barWeight={barWeight}
+                  collarWeight={collarWeight}
+                  availablePlatesKg={availablePlatesKg}
+                  availablePlatesLbs={availablePlatesLbs}
+                />
+                <AdvancedOptions
+                  availablePlatesKg={availablePlatesKg}
+                  setAvailablePlatesKg={setAvailablePlatesKg}
+                  availablePlatesLbs={availablePlatesLbs}
+                  setAvailablePlatesLbs={setAvailablePlatesLbs}
+                  barWeight={barWeight}
+                  setBarWeight={setBarWeight}
+                />
+              </RoundingContext.Provider>
             </UnitContext.Provider>
           </TotalWeightContext.Provider>
         </CardBody>

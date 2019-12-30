@@ -6,8 +6,6 @@ import BarWeightInput from "./BarWeightInput";
 import UnitContext from "../contexts/UnitContext";
 
 const AdvancedOptions = ({
-  rounding,
-  setRounding,
   availablePlatesKg,
   availablePlatesLbs,
   setAvailablePlatesKg,
@@ -36,7 +34,7 @@ const AdvancedOptions = ({
             </Row>
             <Row>
               <Col>
-                <RoundingInput rounding={rounding} setRounding={setRounding} />
+                <RoundingInput />
               </Col>
             </Row>
             <Row>
