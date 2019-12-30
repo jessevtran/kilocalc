@@ -33,6 +33,7 @@ const AdvancedOptions = ({
           availablePlatesLbs={availablePlatesLbs}
           setAvailablePlatesLbs={setAvailablePlatesLbs}
         />
+        <Line />
       </Collapse>
     </div>
   );

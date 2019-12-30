@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import styled from "styled-components";
 import Plate from "./Plate";
 
@@ -37,12 +37,17 @@ const Barbell = ({
   barWeight,
   collarWeight
 }) => {
+  let remainder = barLoad.filter(plate => !platesAvailable.includes(plate));
+  const hasRemainder =
+    remainder && (Array.isArray(remainder) && remainder.length > 0);
+
   const renderBarLoad = () => {
     return barLoad.map((plate, i) => {
       return (
         <Fragment key={`${plate}${i}`}>
-          {!platesAvailable.includes(plate) && <span>+</span>}
-          <Plate weight={plate} unit={unit} />
+          {platesAvailable.includes(plate) && (
+            <Plate weight={plate} unit={unit} />
+          )}
         </Fragment>
       );
     });
@@ -54,6 +59,7 @@ const Barbell = ({
         {renderBarLoad()}
         {collarWeight > 0 && <Collar>{collarWeight}</Collar>}
       </PlateContainer>
+      {hasRemainder && <div>+ {remainder}</div>}
     </div>
   );
 };
