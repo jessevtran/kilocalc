@@ -4,37 +4,7 @@ import BarbellsView from "./BarbellsView";
 import WeightInput from "./WeightInput";
 import AdvancedOptions from "./AdvancedOptions";
 import TotalWeightContext from "../contexts/TotalWeightContext";
-
-const Inputs = ({
-  unit,
-  setUnit,
-  rounding,
-  setRounding,
-  barAndCollarWeight,
-  availablePlatesKg,
-  setAvailablePlatesKg,
-  availablePlatesLbs,
-  setAvailablePlatesLbs,
-  barWeight,
-  setBarWeight,
-  collarWeight,
-  setCollarWeight
-}) => {
-  return (
-    <Form>
-      <WeightInput
-        unit={unit}
-        setUnit={setUnit}
-        rounding={rounding}
-        setRounding={setRounding}
-        barWeight={barWeight}
-        setBarWeight={setBarWeight}
-        collarWeight={collarWeight}
-        setCollarWeight={setCollarWeight}
-      />
-    </Form>
-  );
-};
+import UnitContext from "../contexts/UnitContext";
 
 const UnitConverter = () => {
   const defaultPlates = unit => {
@@ -66,28 +36,28 @@ const UnitConverter = () => {
               setTotalWeight: setWeight
             }}
           >
-            <Inputs
-              unit={unit}
-              setUnit={setUnit}
-              rounding={rounding}
-              setRounding={setRounding}
-              availablePlatesKg={availablePlatesKg}
-              setAvailablePlatesKg={setAvailablePlatesKg}
-              availablePlatesLbs={availablePlatesLbs}
-              setAvailablePlatesLbs={setAvailablePlatesLbs}
-              barWeight={barWeight}
-              setBarWeight={setBarWeight}
-              collarWeight={collarWeight}
-              setCollarWeight={setCollarWeight}
-            />
-            <BarbellsView
-              unit={unit}
-              rounding={rounding}
-              barWeight={barWeight}
-              collarWeight={collarWeight}
-              availablePlatesKg={availablePlatesKg}
-              availablePlatesLbs={availablePlatesLbs}
-            />
+            <UnitContext.Provider
+              value={{
+                unit: unit,
+                setUnit: setUnit
+              }}
+            >
+              <WeightInput
+                rounding={rounding}
+                setRounding={setRounding}
+                barWeight={barWeight}
+                setBarWeight={setBarWeight}
+                collarWeight={collarWeight}
+                setCollarWeight={setCollarWeight}
+              />
+              <BarbellsView
+                rounding={rounding}
+                barWeight={barWeight}
+                collarWeight={collarWeight}
+                availablePlatesKg={availablePlatesKg}
+                availablePlatesLbs={availablePlatesLbs}
+              />
+            </UnitContext.Provider>
           </TotalWeightContext.Provider>
         </CardBody>
       </Card>
@@ -98,7 +68,6 @@ const UnitConverter = () => {
         setAvailablePlatesKg={setAvailablePlatesKg}
         availablePlatesLbs={availablePlatesLbs}
         setAvailablePlatesLbs={setAvailablePlatesLbs}
-        unit={unit}
         barWeight={barWeight}
         setBarWeight={setBarWeight}
       />

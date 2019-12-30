@@ -1,8 +1,9 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useContext } from "react";
 import { Row, Col, Collapse, Card, CardBody, Button } from "reactstrap";
 import RoundingInput from "./RoundingInput";
 import AvailablePlatesInput from "./AvailablePlatesInput";
 import BarWeightInput from "./BarWeightInput";
+import UnitContext from "../contexts/UnitContext";
 
 const AdvancedOptions = ({
   rounding,
@@ -11,10 +12,10 @@ const AdvancedOptions = ({
   availablePlatesLbs,
   setAvailablePlatesKg,
   setAvailablePlatesLbs,
-  unit,
   barWeight,
   setBarWeight
 }) => {
+  const unitCtx = useContext(UnitContext);
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Fragment>
@@ -27,7 +28,7 @@ const AdvancedOptions = ({
             <Row>
               <Col>
                 <BarWeightInput
-                  unit={unit}
+                  unit={unitCtx.unit}
                   barWeight={barWeight}
                   setBarWeight={setBarWeight}
                 />

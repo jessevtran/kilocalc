@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ButtonGroup, Button, Col } from "reactstrap";
+import UnitContext from "../contexts/UnitContext";
 
-const UnitInput = ({ unit, setUnit, setBarWeight, setCollarWeight }) => {
+const UnitInput = ({ setBarWeight, setCollarWeight }) => {
+  const { unit, setUnit } = useContext(UnitContext);
+
   const updateUnit = unit => {
     setUnit(unit);
   };
