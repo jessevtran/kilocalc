@@ -5,10 +5,9 @@ import CollarWeightInput from "./CollarWeightInput";
 import TotalWeightContext from "../contexts/TotalWeightContext";
 import UnitContext from "../contexts/UnitContext";
 
-const WeightInput = ({ collarWeight, setBarWeight, setCollarWeight }) => {
+const WeightInput = () => {
   const { setTotalWeight } = useContext(TotalWeightContext);
-
-  const { unit, setUnit } = useContext(UnitContext);
+  const { unit } = useContext(UnitContext);
   return (
     <FormGroup>
       <Row>
@@ -24,19 +23,10 @@ const WeightInput = ({ collarWeight, setBarWeight, setCollarWeight }) => {
       </Row>
       <Row>
         <Col xs="6">
-          <UnitInput
-            unit={unit}
-            setUnit={setUnit}
-            setBarWeight={setBarWeight}
-            setCollarWeight={setCollarWeight}
-          />
+          <UnitInput />
         </Col>
         <Col xs="6">
-          <CollarWeightInput
-            unit={unit}
-            collarWeight={collarWeight}
-            setCollarWeight={setCollarWeight}
-          />
+          <CollarWeightInput />
         </Col>
       </Row>
     </FormGroup>

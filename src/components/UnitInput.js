@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { ButtonGroup, Button, Col } from "reactstrap";
 import UnitContext from "../contexts/UnitContext";
+import BarAndCollarContext from "../contexts/BarAndCollarContext";
 
-const UnitInput = ({ setBarWeight, setCollarWeight }) => {
+const UnitInput = () => {
   const { unit, setUnit } = useContext(UnitContext);
+  const { setCollarWeight, setBarWeight } = useContext(BarAndCollarContext);
 
   const updateUnit = unit => {
     setUnit(unit);

@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import { ButtonGroup, Button, Col } from "reactstrap";
 import { kgToLbs, displayWeight } from "../logic/units";
 import UnitContext from "../contexts/UnitContext";
+import BarAndCollarContext from "../contexts/BarAndCollarContext";
 
-const CollarWeightInput = ({ collarWeight, setCollarWeight }) => {
+const CollarWeightInput = () => {
   const { unit } = useContext(UnitContext);
+  const { collarWeight, setCollarWeight } = useContext(BarAndCollarContext);
 
   return (
     <Col>
