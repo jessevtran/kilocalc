@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import Barbell from "./Barbell";
 import { Container, Row, Col } from "reactstrap";
 import { weightToBarLoad } from "../logic/barload";
 import { kgToLbs, lbsToKg, displayWeight, plateRound } from "../logic/units";
+import TotalWeightContext from "../contexts/TotalWeightContext";
 
 const BarbellsView = ({
-  weight,
   unit,
   rounding,
   barWeight,
@@ -13,6 +13,9 @@ const BarbellsView = ({
   availablePlatesKg,
   availablePlatesLbs
 }) => {
+  const totalWeightCtx = useContext(TotalWeightContext);
+  const weight = totalWeightCtx.totalWeight;
+
   if (weight === 0) {
     return null;
   }

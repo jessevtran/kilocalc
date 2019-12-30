@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FormGroup, Input, Row, Col } from "reactstrap";
 import UnitInput from "./UnitInput";
 import CollarWeightInput from "./CollarWeightInput";
+import TotalWeightContext from "../contexts/TotalWeightContext";
 
 const WeightInput = ({
   unit,
   setUnit,
-  weight,
-  setWeight,
   collarWeight,
   setBarWeight,
   setCollarWeight
 }) => {
+  const totalWeightCtx = useContext(TotalWeightContext);
+  const setWeight = totalWeightCtx.setTotalWeight;
   return (
     <FormGroup>
       <Row>
