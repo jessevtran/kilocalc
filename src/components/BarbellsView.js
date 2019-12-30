@@ -4,19 +4,19 @@ import { Container, Row, Col } from "reactstrap";
 import { weightToBarLoad } from "../logic/barload";
 import { kgToLbs, lbsToKg, displayWeight, plateRound } from "../logic/units";
 import TotalWeightContext from "../contexts/TotalWeightContext";
+import UnitContext from "../contexts/UnitContext";
 
 const BarbellsView = ({
-  unit,
   rounding,
   barWeight,
   collarWeight,
   availablePlatesKg,
   availablePlatesLbs
 }) => {
-  const totalWeightCtx = useContext(TotalWeightContext);
-  const weight = totalWeightCtx.totalWeight;
+  const { totalWeight } = useContext(TotalWeightContext);
+  const { unit } = useContext(UnitContext);
 
-  if (weight === 0) {
+  if (totalWeight === 0) {
     return null;
   }
 
@@ -30,7 +30,7 @@ const BarbellsView = ({
   };
 
   const barLoad = weightToBarLoad(
-    weight,
+    totalWeight,
     getPlates(unit),
     barWeight,
     collarWeight
@@ -40,7 +40,7 @@ const BarbellsView = ({
   const convert = unit === "kg" ? kgToLbs : lbsToKg;
   const otherUnit = unit === "kg" ? "lbs" : "kg";
   const otherWeight = convert(
-    plateRound(weight),
+    plateRound(totalWeight),
     otherUnit,
     smallestPlate,
     rounding
@@ -56,19 +56,19 @@ const BarbellsView = ({
       <Row>
         <Col sm="6">
           <h2>
-            {weight}
+            {totalWeight}
             {unit}
           </h2>
           <Barbell
             barLoad={barLoad}
-            weight={weight}
+            weight={totalWeight}
             unit={unit}
             platesAvailable={getPlates(unit)}
           />
         </Col>
         <Col sm="6">
           <h2>
-            {displayWeight(convert(weight))}
+            {displayWeight(convert(totalWeight))}
             {otherUnit}
           </h2>
           <h2>

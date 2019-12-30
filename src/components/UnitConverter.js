@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { Form, Card, CardBody } from "reactstrap";
+import { Card, CardBody } from "reactstrap";
 import BarbellsView from "./BarbellsView";
 import WeightInput from "./WeightInput";
 import AdvancedOptions from "./AdvancedOptions";
@@ -57,20 +57,20 @@ const UnitConverter = () => {
                 availablePlatesKg={availablePlatesKg}
                 availablePlatesLbs={availablePlatesLbs}
               />
+              <AdvancedOptions
+                rounding={rounding}
+                setRounding={setRounding}
+                availablePlatesKg={availablePlatesKg}
+                setAvailablePlatesKg={setAvailablePlatesKg}
+                availablePlatesLbs={availablePlatesLbs}
+                setAvailablePlatesLbs={setAvailablePlatesLbs}
+                barWeight={barWeight}
+                setBarWeight={setBarWeight}
+              />
             </UnitContext.Provider>
           </TotalWeightContext.Provider>
         </CardBody>
       </Card>
-      <AdvancedOptions
-        rounding={rounding}
-        setRounding={setRounding}
-        availablePlatesKg={availablePlatesKg}
-        setAvailablePlatesKg={setAvailablePlatesKg}
-        availablePlatesLbs={availablePlatesLbs}
-        setAvailablePlatesLbs={setAvailablePlatesLbs}
-        barWeight={barWeight}
-        setBarWeight={setBarWeight}
-      />
     </Fragment>
   );
 };

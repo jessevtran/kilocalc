@@ -3,16 +3,12 @@ import { FormGroup, Input, Row, Col } from "reactstrap";
 import UnitInput from "./UnitInput";
 import CollarWeightInput from "./CollarWeightInput";
 import TotalWeightContext from "../contexts/TotalWeightContext";
+import UnitContext from "../contexts/UnitContext";
 
-const WeightInput = ({
-  unit,
-  setUnit,
-  collarWeight,
-  setBarWeight,
-  setCollarWeight
-}) => {
-  const totalWeightCtx = useContext(TotalWeightContext);
-  const setWeight = totalWeightCtx.setTotalWeight;
+const WeightInput = ({ collarWeight, setBarWeight, setCollarWeight }) => {
+  const { setTotalWeight } = useContext(TotalWeightContext);
+
+  const { unit, setUnit } = useContext(UnitContext);
   return (
     <FormGroup>
       <Row>
@@ -22,7 +18,7 @@ const WeightInput = ({
             step=".25"
             id="weightInput"
             type="number"
-            onChange={e => setWeight(e.target.value)}
+            onChange={e => setTotalWeight(e.target.value)}
           />
         </Col>
       </Row>
