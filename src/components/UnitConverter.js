@@ -1,5 +1,4 @@
-import React, { Fragment, useState } from "react";
-import { Card, CardBody } from "reactstrap";
+import React, { useState } from "react";
 import BarbellsView from "./BarbellsView";
 import WeightInput from "./WeightInput";
 import AdvancedOptions from "./AdvancedOptions";
@@ -29,53 +28,49 @@ const UnitConverter = () => {
   );
 
   return (
-    <Fragment>
-      <Card>
-        <CardBody>
-          <TotalWeightContext.Provider
+    <div>
+      <TotalWeightContext.Provider
+        value={{
+          totalWeight: weight,
+          setTotalWeight: setWeight
+        }}
+      >
+        <UnitContext.Provider
+          value={{
+            unit: unit,
+            setUnit: setUnit
+          }}
+        >
+          <RoundingContext.Provider
             value={{
-              totalWeight: weight,
-              setTotalWeight: setWeight
+              rounding: rounding,
+              setRounding: setRounding
             }}
           >
-            <UnitContext.Provider
+            <BarAndCollarContext.Provider
               value={{
-                unit: unit,
-                setUnit: setUnit
+                barWeight: barWeight,
+                setBarWeight: setBarWeight,
+                collarWeight: collarWeight,
+                setCollarWeight: setCollarWeight
               }}
             >
-              <RoundingContext.Provider
-                value={{
-                  rounding: rounding,
-                  setRounding: setRounding
-                }}
-              >
-                <BarAndCollarContext.Provider
-                  value={{
-                    barWeight: barWeight,
-                    setBarWeight: setBarWeight,
-                    collarWeight: collarWeight,
-                    setCollarWeight: setCollarWeight
-                  }}
-                >
-                  <WeightInput />
-                  <BarbellsView
-                    availablePlatesKg={availablePlatesKg}
-                    availablePlatesLbs={availablePlatesLbs}
-                  />
-                  <AdvancedOptions
-                    availablePlatesKg={availablePlatesKg}
-                    setAvailablePlatesKg={setAvailablePlatesKg}
-                    availablePlatesLbs={availablePlatesLbs}
-                    setAvailablePlatesLbs={setAvailablePlatesLbs}
-                  />
-                </BarAndCollarContext.Provider>
-              </RoundingContext.Provider>
-            </UnitContext.Provider>
-          </TotalWeightContext.Provider>
-        </CardBody>
-      </Card>
-    </Fragment>
+              <WeightInput />
+              <BarbellsView
+                availablePlatesKg={availablePlatesKg}
+                availablePlatesLbs={availablePlatesLbs}
+              />
+              <AdvancedOptions
+                availablePlatesKg={availablePlatesKg}
+                setAvailablePlatesKg={setAvailablePlatesKg}
+                availablePlatesLbs={availablePlatesLbs}
+                setAvailablePlatesLbs={setAvailablePlatesLbs}
+              />
+            </BarAndCollarContext.Provider>
+          </RoundingContext.Provider>
+        </UnitContext.Provider>
+      </TotalWeightContext.Provider>
+    </div>
   );
 };
 

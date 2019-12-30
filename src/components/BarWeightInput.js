@@ -1,17 +1,22 @@
-import React from "react";
-import { Col, Input } from "reactstrap";
+import React, { useContext } from "react";
+import { Input } from "reactstrap";
+import BarAndCollarContext from "../contexts/BarAndCollarContext";
+import UnitContext from "../contexts/UnitContext";
+import styled from "styled-components";
 
-const BarWeightInput = ({ unit, barWeight, setBarWeight }) => {
+const BarWeightInput = () => {
+  const { unit } = useContext(UnitContext);
+  const { setBarWeight } = useContext(BarAndCollarContext);
   return (
-    <Col>
-      <h4>Bar Weight</h4>
+    <div>
+      <div>Specify Bar Weight ({unit})</div>
       <Input
         step=".25"
         id="barWeightInput"
         type="number"
         onChange={e => setBarWeight(Number(e.target.value))}
       />
-    </Col>
+    </div>
   );
 };
 

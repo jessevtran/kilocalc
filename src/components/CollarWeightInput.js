@@ -8,23 +8,27 @@ const CollarWeightInput = () => {
   const { unit } = useContext(UnitContext);
   const { collarWeight, setCollarWeight } = useContext(BarAndCollarContext);
 
+  const displayCollarWeight =
+    unit === "kg" ? collarWeight : displayWeight(kgToLbs(2.5));
+
   return (
     <Col>
-      <h4>Collars</h4>
+      <div>Clips or Collars</div>
       <ButtonGroup>
         <Button
           color="primary"
           onClick={() => setCollarWeight(0)}
           active={collarWeight === 0}
         >
-          {`0${unit}`}
+          <span>0{unit}</span>
         </Button>
         <Button
           color="primary"
           onClick={() => setCollarWeight(2.5)}
           active={collarWeight === 2.5}
         >
-          {unit === "kg" ? "2.5kg" : `${displayWeight(kgToLbs(2.5))}lbs`}
+          <span>{displayCollarWeight}</span>
+          <span>{unit}</span>
         </Button>
       </ButtonGroup>
     </Col>

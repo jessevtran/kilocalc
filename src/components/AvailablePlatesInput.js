@@ -1,5 +1,10 @@
 import React, { Fragment, useState } from "react";
-import { Collapse, Card, CardBody, Button, ButtonGroup } from "reactstrap";
+import { Collapse, Button, ButtonGroup } from "reactstrap";
+import styled from "styled-components";
+
+const Label = styled.span`
+  margin-right: 1rem;
+`;
 
 const AvailablePlatesInput = ({
   availablePlatesKg,
@@ -54,50 +59,44 @@ const AvailablePlatesInput = ({
 
   return (
     <Fragment>
-      <h4>Configure Available Plates</h4>
-      <div>
-        <Button color="primary" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? "Hide Available" : "Show Available"}
-        </Button>
-      </div>
+      <Label>Set Available Plates</Label>
+      <Button color="primary" onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? "Hide Available" : "Show Available"}
+      </Button>
       <div>
         <Collapse isOpen={isOpen}>
-          <Card>
+          <div>
             <div>Kg</div>
-            <CardBody>
-              <ButtonGroup>
-                <KgButton weight={25} />
-                <KgButton weight={20} />
-                <KgButton weight={15} />
-                <KgButton weight={10} />
-                <KgButton weight={5} />
-              </ButtonGroup>
-              <ButtonGroup>
-                <KgButton weight={2.5} />
-                <KgButton weight={1.25} />
-                <KgButton weight={1} />
-                <KgButton weight={0.5} />
-                <KgButton weight={0.25} />
-              </ButtonGroup>
-            </CardBody>
-            <div>Lbs</div>
-            <CardBody>
-              <ButtonGroup>
-                <LbsButton weight={45} />
-                <LbsButton weight={35} />
-                <LbsButton weight={25} />
-                <LbsButton weight={10} />
-                <LbsButton weight={5} />
-              </ButtonGroup>
-              <ButtonGroup>
-                <LbsButton weight={2.5} />
-                <LbsButton weight={1.25} />
-                <LbsButton weight={1} />
-                <LbsButton weight={0.5} />
-                <LbsButton weight={0.25} />
-              </ButtonGroup>
-            </CardBody>
-          </Card>
+            <ButtonGroup>
+              <KgButton weight={25} />
+              <KgButton weight={20} />
+              <KgButton weight={15} />
+              <KgButton weight={10} />
+              <KgButton weight={5} />
+            </ButtonGroup>
+            <ButtonGroup>
+              <KgButton weight={2.5} />
+              <KgButton weight={1.25} />
+              <KgButton weight={1} />
+              <KgButton weight={0.5} />
+              <KgButton weight={0.25} />
+            </ButtonGroup>
+          </div>
+          <div>Lbs</div>
+          <ButtonGroup>
+            <LbsButton weight={45} />
+            <LbsButton weight={35} />
+            <LbsButton weight={25} />
+            <LbsButton weight={10} />
+            <LbsButton weight={5} />
+          </ButtonGroup>
+          <ButtonGroup>
+            <LbsButton weight={2.5} />
+            <LbsButton weight={1.25} />
+            <LbsButton weight={1} />
+            <LbsButton weight={0.5} />
+            <LbsButton weight={0.25} />
+          </ButtonGroup>
         </Collapse>
       </div>
     </Fragment>

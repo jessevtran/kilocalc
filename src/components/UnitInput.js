@@ -13,7 +13,7 @@ const UnitInput = () => {
 
   return (
     <Col>
-      <h4>Unit</h4>
+      <div>Unit</div>
       <ButtonGroup>
         <Button
           color="primary"

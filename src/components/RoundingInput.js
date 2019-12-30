@@ -1,12 +1,17 @@
-import React, { Fragment, useContext } from "react";
+import React, { useContext } from "react";
 import { ButtonGroup, Button } from "reactstrap";
 import RoundingContext from "../contexts/RoundingContext";
+import styled from "styled-components";
+
+const Label = styled.span`
+  margin-right: 1rem;
+`;
 
 const RoundingInput = () => {
   const { rounding, setRounding } = useContext(RoundingContext);
   return (
-    <Fragment>
-      <h4>Rounding</h4>
+    <div>
+      <Label>Rounding</Label>
       <ButtonGroup>
         <Button
           color="primary"
@@ -30,7 +35,7 @@ const RoundingInput = () => {
           down
         </Button>
       </ButtonGroup>
-    </Fragment>
+    </div>
   );
 };
 

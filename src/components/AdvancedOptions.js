@@ -1,56 +1,40 @@
-import React, { useState, Fragment, useContext } from "react";
-import { Row, Col, Collapse, Card, CardBody, Button } from "reactstrap";
+import React, { useState } from "react";
+import { Collapse, Button } from "reactstrap";
 import RoundingInput from "./RoundingInput";
 import AvailablePlatesInput from "./AvailablePlatesInput";
 import BarWeightInput from "./BarWeightInput";
-import UnitContext from "../contexts/UnitContext";
+import styled from "styled-components";
+
+const Line = styled.hr`
+  margin-bottom: 1rem;
+`;
 
 const AdvancedOptions = ({
   availablePlatesKg,
   availablePlatesLbs,
   setAvailablePlatesKg,
-  setAvailablePlatesLbs,
-  barWeight,
-  setBarWeight
+  setAvailablePlatesLbs
 }) => {
-  const unitCtx = useContext(UnitContext);
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <Fragment>
+    <div>
       <Button color="secondary" onClick={() => setIsOpen(!isOpen)}>
         {isOpen ? "Hide Advanced Options" : "Show Advanced Options"}
       </Button>
       <Collapse isOpen={isOpen}>
-        <Card>
-          <CardBody>
-            <Row>
-              <Col>
-                <BarWeightInput
-                  unit={unitCtx.unit}
-                  barWeight={barWeight}
-                  setBarWeight={setBarWeight}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <RoundingInput />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <AvailablePlatesInput
-                  availablePlatesKg={availablePlatesKg}
-                  setAvailablePlatesKg={setAvailablePlatesKg}
-                  availablePlatesLbs={availablePlatesLbs}
-                  setAvailablePlatesLbs={setAvailablePlatesLbs}
-                />
-              </Col>
-            </Row>
-          </CardBody>
-        </Card>
+        <Line />
+        <BarWeightInput />
+        <Line />
+        <RoundingInput />
+        <Line />
+        <AvailablePlatesInput
+          availablePlatesKg={availablePlatesKg}
+          setAvailablePlatesKg={setAvailablePlatesKg}
+          availablePlatesLbs={availablePlatesLbs}
+          setAvailablePlatesLbs={setAvailablePlatesLbs}
+        />
       </Collapse>
-    </Fragment>
+    </div>
   );
 };
 

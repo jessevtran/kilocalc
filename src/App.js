@@ -3,6 +3,9 @@ import "./App.css";
 import UnitConverter from "./components/UnitConverter";
 import styled from "styled-components";
 
+const Body = styled.div`
+  padding: 1rem;
+`;
 const Footer = styled.footer`
   bottom: 0;
   height: 5%;
@@ -13,7 +16,9 @@ const Footer = styled.footer`
 function App() {
   return (
     <div className="App">
-      <UnitConverter />
+      <Body>
+        <UnitConverter />
+      </Body>
       <Footer>
         Please send any problems or requests to this{" "}
         <a href="mailto:mike+kilocalc@vessia.net">email</a> or{" "}
