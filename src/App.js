@@ -7,10 +7,13 @@ const Body = styled.div`
   padding: 1rem;
 `;
 const Footer = styled.footer`
+  position: absolute;
   bottom: 0;
   height: 5%;
-  text-align: center;
+  width: 100%;
   margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 function App() {
@@ -20,9 +23,7 @@ function App() {
         <UnitConverter />
       </Body>
       <Footer>
-        Please send any problems or requests to this{" "}
-        <a href="mailto:mike+kilocalc@vessia.net">email</a> or{" "}
-        <a href="https://instagram.com/lambdalift">instagram</a>
+        <a href="mailto:mike+kilocalc@vessia.net">Report an issue</a>
       </Footer>
     </div>
   );
