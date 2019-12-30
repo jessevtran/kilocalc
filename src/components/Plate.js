@@ -9,6 +9,7 @@ const DefaultPlate = styled.div`
   min-width: 30px;
   border-style: solid;
   border-width: 1px;
+  padding: 0.25rem;
 `;
 
 const StyledPlate = styled(DefaultPlate)`

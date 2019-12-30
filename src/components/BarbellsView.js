@@ -34,7 +34,6 @@ const BarbellsView = ({ availablePlatesKg, availablePlatesLbs }) => {
     collarWeight
   );
 
-  const smallestPlate = getSmallestPlate(unit);
   const convert = unit === "kg" ? kgToLbs : lbsToKg;
   const otherUnit = unit === "kg" ? "lbs" : "kg";
   const otherSmallestPlate = getSmallestPlate(otherUnit);
@@ -54,8 +53,17 @@ const BarbellsView = ({ availablePlatesKg, availablePlatesLbs }) => {
   } else {
     otherBarWeight = convert(barWeight);
   }
-  const otherCollarWeight =
-    otherUnit === "lbs" ? 0 : displayWeight(kgToLbs(collarWeight));
+
+  let otherCollarWeight;
+
+  if (otherUnit === "lbs" || (otherUnit === "kg" && collarWeight === 0)) {
+    otherCollarWeight = 0;
+  } else if (otherUnit === "kg" && collarWeight > 0) {
+    otherCollarWeight = 2.5;
+  } else {
+    // lbs with collars (why)
+    otherCollarWeight = 5.51;
+  }
 
   const otherBarLoad = weightToBarLoad(
     otherWeight,
@@ -77,6 +85,8 @@ const BarbellsView = ({ availablePlatesKg, availablePlatesLbs }) => {
             weight={totalWeight}
             unit={unit}
             platesAvailable={getPlates(unit)}
+            barWeight={displayWeight(barWeight)}
+            collarWeight={collarWeight}
           />
         </Col>
         <Col sm="6">
@@ -86,7 +96,7 @@ const BarbellsView = ({ availablePlatesKg, availablePlatesLbs }) => {
           </h2>
           <h2>
             <span>Rounded ({rounding}):</span>
-            <span>{plateRound(otherWeight, smallestPlate, rounding)}</span>
+            <span>{plateRound(otherWeight, otherSmallestPlate, rounding)}</span>
             <span>{otherUnit}</span>
           </h2>
           <Barbell
@@ -94,6 +104,8 @@ const BarbellsView = ({ availablePlatesKg, availablePlatesLbs }) => {
             weight={otherWeight}
             unit={otherUnit}
             platesAvailable={getPlates(otherUnit)}
+            barWeight={displayWeight(otherBarWeight)}
+            collarWeight={otherCollarWeight}
           />
         </Col>
       </Row>

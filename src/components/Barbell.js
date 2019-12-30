@@ -17,14 +17,26 @@ const PlateContainer = styled.div`
 
 const Bar = styled.div`
   width: 50px;
-  color: gray;
   background-color: gray;
   height: 15;
 `;
 
+const Collar = styled.div`
+  background-color: gray;
+  color: black;
+  height: 45px;
+  min-width: 30px;
+  padding: 10px;
+`;
 
-const Barbell = ({ weight, unit, barLoad, platesAvailable }) => {
-
+const Barbell = ({
+  weight,
+  unit,
+  barLoad,
+  platesAvailable,
+  barWeight,
+  collarWeight
+}) => {
   const renderBarLoad = () => {
     return barLoad.map((plate, i) => {
       return (
@@ -38,12 +50,12 @@ const Barbell = ({ weight, unit, barLoad, platesAvailable }) => {
   return (
     <div>
       <PlateContainer>
-        <Bar>Bar</Bar>
+        <Bar>{barWeight}</Bar>
         {renderBarLoad()}
+        {collarWeight > 0 && <Collar>{collarWeight}</Collar>}
       </PlateContainer>
     </div>
   );
 };
 
 export default Barbell;
-
