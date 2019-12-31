@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Collapse, Button } from "reactstrap";
 import RoundingInput from "./RoundingInput";
 import AvailablePlatesInput from "./AvailablePlatesInput";
@@ -9,12 +9,7 @@ const Line = styled.hr`
   margin-bottom: 1rem;
 `;
 
-const AdvancedOptions = ({
-  availablePlatesKg,
-  availablePlatesLbs,
-  setAvailablePlatesKg,
-  setAvailablePlatesLbs
-}) => {
+const AdvancedOptions = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
@@ -27,12 +22,7 @@ const AdvancedOptions = ({
         <Line />
         <RoundingInput />
         <Line />
-        <AvailablePlatesInput
-          availablePlatesKg={availablePlatesKg}
-          setAvailablePlatesKg={setAvailablePlatesKg}
-          availablePlatesLbs={availablePlatesLbs}
-          setAvailablePlatesLbs={setAvailablePlatesLbs}
-        />
+        <AvailablePlatesInput />
         <Line />
       </Collapse>
     </div>

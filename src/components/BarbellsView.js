@@ -7,12 +7,16 @@ import TotalWeightContext from "../contexts/TotalWeightContext";
 import UnitContext from "../contexts/UnitContext";
 import RoundingContext from "../contexts/RoundingContext";
 import BarAndCollarContext from "../contexts/BarAndCollarContext";
+import AvailablePlatesContext from "../contexts/AvailablePlatesContext";
 
-const BarbellsView = ({ availablePlatesKg, availablePlatesLbs }) => {
+const BarbellsView = () => {
   const { totalWeight } = useContext(TotalWeightContext);
   const { unit } = useContext(UnitContext);
   const { rounding } = useContext(RoundingContext);
   const { barWeight, collarWeight } = useContext(BarAndCollarContext);
+  const { availablePlatesKg, availablePlatesLbs } = useContext(
+    AvailablePlatesContext
+  );
 
   if (totalWeight === 0) {
     return null;

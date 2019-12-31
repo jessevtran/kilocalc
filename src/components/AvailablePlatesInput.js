@@ -1,18 +1,21 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext } from "react";
 import { Collapse, Button, ButtonGroup } from "reactstrap";
 import styled from "styled-components";
+import AvailablePlatesContext from "../contexts/AvailablePlatesContext";
 
 const Label = styled.span`
   margin-right: 1rem;
 `;
 
-const AvailablePlatesInput = ({
-  availablePlatesKg,
-  setAvailablePlatesKg,
-  availablePlatesLbs,
-  setAvailablePlatesLbs
-}) => {
+const AvailablePlatesInput = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const {
+    availablePlatesKg,
+    availablePlatesLbs,
+    setAvailablePlatesKg,
+    setAvailablePlatesLbs
+  } = useContext(AvailablePlatesContext);
 
   const togglePlate = (plates, newPlate, update) => {
     let newPlates = [...plates];

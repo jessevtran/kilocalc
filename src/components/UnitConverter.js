@@ -6,6 +6,7 @@ import TotalWeightContext from "../contexts/TotalWeightContext";
 import UnitContext from "../contexts/UnitContext";
 import RoundingContext from "../contexts/RoundingContext";
 import BarAndCollarContext from "../contexts/BarAndCollarContext";
+import AvailablePlatesContext from "../contexts/AvailablePlatesContext";
 
 const UnitConverter = () => {
   const defaultPlates = unit => {
@@ -55,17 +56,18 @@ const UnitConverter = () => {
                 setCollarWeight: setCollarWeight
               }}
             >
-              <WeightInput />
-              <BarbellsView
-                availablePlatesKg={availablePlatesKg}
-                availablePlatesLbs={availablePlatesLbs}
-              />
-              <AdvancedOptions
-                availablePlatesKg={availablePlatesKg}
-                setAvailablePlatesKg={setAvailablePlatesKg}
-                availablePlatesLbs={availablePlatesLbs}
-                setAvailablePlatesLbs={setAvailablePlatesLbs}
-              />
+              <AvailablePlatesContext.Provider
+                value={{
+                  availablePlatesKg: availablePlatesKg,
+                  availablePlatesLbs: availablePlatesLbs,
+                  setAvailablePlatesKg: setAvailablePlatesKg,
+                  setAvailablePlatesLbs: setAvailablePlatesLbs
+                }}
+              >
+                <WeightInput />
+                <BarbellsView />
+                <AdvancedOptions />
+              </AvailablePlatesContext.Provider>
             </BarAndCollarContext.Provider>
           </RoundingContext.Provider>
         </UnitContext.Provider>
