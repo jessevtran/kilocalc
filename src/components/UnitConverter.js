@@ -7,6 +7,7 @@ import UnitContext from "../contexts/UnitContext";
 import RoundingContext from "../contexts/RoundingContext";
 import BarAndCollarContext from "../contexts/BarAndCollarContext";
 import AvailablePlatesContext from "../contexts/AvailablePlatesContext";
+import { Row, Col } from "reactstrap";
 
 const UnitConverter = () => {
   const defaultPlates = unit => {
@@ -64,9 +65,15 @@ const UnitConverter = () => {
                   setAvailablePlatesLbs: setAvailablePlatesLbs
                 }}
               >
-                <WeightInput />
-                <BarbellsView />
-                <AdvancedOptions />
+                <Row>
+                  <Col lg="4">
+                    <WeightInput />
+                    <AdvancedOptions />
+                  </Col>
+                  <Col lg="8">
+                    <BarbellsView />
+                  </Col>
+                </Row>
               </AvailablePlatesContext.Provider>
             </BarAndCollarContext.Provider>
           </RoundingContext.Provider>
