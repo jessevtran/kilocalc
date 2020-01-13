@@ -27,7 +27,7 @@ function App() {
         </div>
         <div>
           Want to support more powerlifting software?
-          <a href="https://www.patreon.com/openpowerlifting">Donate to the cause!</a>
+          <a href="https://www.patreon.com/openpowerlifting"> Donate to the cause!</a>
         </div>
       </Footer>
     </div>
