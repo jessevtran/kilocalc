@@ -22,9 +22,15 @@ function App() {
         <UnitConverter />
       </Body>
       <Footer>
-        <a href="mailto:mike+kilocalc@vessia.net">Report an issue</a>
-        <a href="https://gitlab.com/michaelvessia/kilocalc">View the source or make changes</a>
-        <a href="https://www.patreon.com/openpowerlifting">Want to support more powerlifting software? Donate to the cause!</a>
+        <div>
+          <a href="mailto:mike+kilocalc@vessia.net">Report an issue</a>
+        </div>
+        <div>
+          <a href="https://gitlab.com/michaelvessia/kilocalc">View the source or make changes</a>
+        </div>
+        <div>
+          <a href="https://www.patreon.com/openpowerlifting">Want to support more powerlifting software? Donate to the cause!</a>
+        </div>
       </Footer>
     </div>
   );
