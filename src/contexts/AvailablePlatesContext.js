@@ -23,7 +23,6 @@ const initialState = {
 };
 
 const updatePairs = (plates, weight, unit, newPairs) => {
-  console.log(plates, weight, unit, newPairs);
   const plate = plates.filter(plate => plate.weight === weight)[0];
   if (plate) {
     plate.pairs = Number(newPairs);
@@ -37,18 +36,24 @@ const reducer = (state, action) => {
     case "update_pairs":
       return {
         ...state,
-        availablePlatesKg: updatePairs(
-          state.availablePlatesKg,
-          action.weight,
-          action.unit,
-          action.newPairs
-        ),
-        availablePlatesLbs: updatePairs(
-          state.availablePlatesLbs,
-          action.weight,
-          action.unit,
-          action.newPairs
-        )
+        availablePlatesKg:
+          action.unit === "kg"
+            ? updatePairs(
+                state.availablePlatesKg,
+                action.weight,
+                action.unit,
+                action.newPairs
+              )
+            : state.availablePlatesKg,
+        availablePlatesLbs:
+          action.unit === "lbs"
+            ? updatePairs(
+                state.availablePlatesLbs,
+                action.weight,
+                action.unit,
+                action.newPairs
+              )
+            : state.availablePlatesLbs
       };
     default:
       return {
