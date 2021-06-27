@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Collapse, Button } from "reactstrap";
+import { Button, Collapse, Divider } from "@material-ui/core";
 import RoundingInput from "./RoundingInput";
 import AvailablePlatesInput from "./AvailablePlatesInput";
 import BarWeightInput from "./BarWeightInput";
+import CollarWeightInput from "./CollarWeightInput";
 import styled from "styled-components";
 
-const Line = styled.hr`
+const Spacer = styled.div`
   margin-bottom: 1rem;
 `;
 
@@ -13,17 +14,22 @@ const AdvancedOptions = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
-      <Button color="secondary" onClick={() => setIsOpen(!isOpen)}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => setIsOpen(!isOpen)}
+      >
         {isOpen ? "Hide Advanced Options" : "Show Advanced Options"}
       </Button>
-      <Collapse isOpen={isOpen}>
-        <Line />
+      <Divider style={{ margin: "1rem 0" }} />
+      <Collapse in={isOpen}>
+        <CollarWeightInput />
+        <Spacer />
         <BarWeightInput />
-        <Line />
+        <Spacer />
         <RoundingInput />
-        <Line />
+        <Spacer />
         <AvailablePlatesInput />
-        <Line />
       </Collapse>
     </div>
   );

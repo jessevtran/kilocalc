@@ -6,28 +6,15 @@ import TotalWeightContext from "../contexts/TotalWeightContext";
 import UnitContext from "../contexts/UnitContext";
 import RoundingContext from "../contexts/RoundingContext";
 import BarAndCollarContext from "../contexts/BarAndCollarContext";
-import AvailablePlatesContext from "../contexts/AvailablePlatesContext";
-import { Row, Col } from "reactstrap";
+import { AvailablePlatesProvider } from "../contexts/AvailablePlatesContext";
+import { Grid } from "@material-ui/core";
 
 const UnitConverter = () => {
-  const defaultPlates = unit => {
-    return unit === "kg"
-      ? [25, 20, 15, 10, 5, 2.5, 1.25]
-      : [45, 25, 10, 5, 2.5];
-  };
-
   const [weight, setWeight] = useState(0);
   const [unit, setUnit] = useState("kg");
   const [rounding, setRounding] = useState("nearest");
   const [barWeight, setBarWeight] = useState(20);
   const [collarWeight, setCollarWeight] = useState(2.5);
-
-  const [availablePlatesKg, setAvailablePlatesKg] = useState(
-    defaultPlates("kg")
-  );
-  const [availablePlatesLbs, setAvailablePlatesLbs] = useState(
-    defaultPlates("lbs")
-  );
 
   return (
     <div>
@@ -57,24 +44,17 @@ const UnitConverter = () => {
                 setCollarWeight: setCollarWeight
               }}
             >
-              <AvailablePlatesContext.Provider
-                value={{
-                  availablePlatesKg: availablePlatesKg,
-                  availablePlatesLbs: availablePlatesLbs,
-                  setAvailablePlatesKg: setAvailablePlatesKg,
-                  setAvailablePlatesLbs: setAvailablePlatesLbs
-                }}
-              >
-                <Row>
-                  <Col lg="4">
+              <AvailablePlatesProvider>
+                <Grid container spacing={3}>
+                  <Grid item lg={4}>
                     <WeightInput />
                     <AdvancedOptions />
-                  </Col>
-                  <Col lg="8">
+                  </Grid>
+                  <Grid item lg={8}>
                     <BarbellsView />
-                  </Col>
-                </Row>
-              </AvailablePlatesContext.Provider>
+                  </Grid>
+                </Grid>
+              </AvailablePlatesProvider>
             </BarAndCollarContext.Provider>
           </RoundingContext.Provider>
         </UnitContext.Provider>

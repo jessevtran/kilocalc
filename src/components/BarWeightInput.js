@@ -1,21 +1,25 @@
 import React, { useContext } from "react";
-import { Input } from "reactstrap";
 import BarAndCollarContext from "../contexts/BarAndCollarContext";
 import UnitContext from "../contexts/UnitContext";
+import { Container, TextField, InputAdornment } from "@material-ui/core";
 
 const BarWeightInput = () => {
   const { unit } = useContext(UnitContext);
   const { setBarWeight } = useContext(BarAndCollarContext);
   return (
-    <div>
-      <div>Specify Bar Weight ({unit})</div>
-      <Input
-        step=".25"
-        id="barWeightInput"
+    <Container>
+      <TextField
+        label={`Bar Weight`}
+        id="bar-weight-input"
+        variant="outlined"
+        size="small"
         type="number"
+        InputProps={{
+          endAdornment: <InputAdornment position="end">{unit}</InputAdornment>
+        }}
         onChange={e => setBarWeight(Number(e.target.value))}
       />
-    </div>
+    </Container>
   );
 };
 

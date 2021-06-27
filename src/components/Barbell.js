@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
 import Plate from "./Plate";
+import { Typography } from "@material-ui/core";
 
 const PlateContainer = styled.div`
   display: flex;
@@ -15,18 +16,23 @@ const PlateContainer = styled.div`
   font-weight: bold;
 `;
 
-const Bar = styled.div`
+const Bar = styled(Typography).attrs(() => ({
+  variant: "overline"
+}))`
   width: 50px;
-  background-color: gray;
+  background-color: #333;
+  color: white;
   height: 15;
 `;
 
-const Collar = styled.div`
+const Collar = styled(Typography).attrs(() => ({
+  variant: "overline"
+}))`
   background-color: gray;
   color: black;
-  height: 45px;
+  height: 35px;
   min-width: 30px;
-  padding: 10px;
+  padding: 5px;
 `;
 
 const Barbell = ({
@@ -37,7 +43,11 @@ const Barbell = ({
   barWeight,
   collarWeight
 }) => {
-  let remainder = barLoad.filter(plate => !platesAvailable.includes(plate));
+  let remainder = barLoad.filter(
+    plate =>
+      !platesAvailable.some(plateAvailable => plateAvailable.weight === plate)
+  );
+
   const hasRemainder =
     remainder && (Array.isArray(remainder) && remainder.length > 0);
 
@@ -45,9 +55,9 @@ const Barbell = ({
     return barLoad.map((plate, i) => {
       return (
         <Fragment key={`${plate}${i}`}>
-          {platesAvailable.includes(plate) && (
-            <Plate weight={plate} unit={unit} />
-          )}
+          {platesAvailable.some(
+            plateAvailable => plateAvailable.weight === plate
+          ) && <Plate weight={plate} unit={unit} />}
         </Fragment>
       );
     });
@@ -57,9 +67,19 @@ const Barbell = ({
       <PlateContainer>
         <Bar>{barWeight}</Bar>
         {renderBarLoad()}
-        {collarWeight > 0 && <Collar>{collarWeight}</Collar>}
+        {collarWeight > 0 && (
+          <>
+            <Collar>{collarWeight}</Collar>
+            <Bar>&nbsp;</Bar>
+          </>
+        )}
       </PlateContainer>
-      {hasRemainder && <div>+ {remainder}</div>}
+      {hasRemainder && (
+        <Typography variant="caption">
+          + {remainder}
+          {unit} remainder
+        </Typography>
+      )}
     </div>
   );
 };
