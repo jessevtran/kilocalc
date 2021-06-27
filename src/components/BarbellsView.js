@@ -1,34 +1,36 @@
 import React, { useContext } from "react";
 import Barbell from "./Barbell";
-import { Container, Row, Col } from "reactstrap";
 import { weightToBarLoad } from "../logic/barload";
 import { kgToLbs, lbsToKg, displayWeight, plateRound } from "../logic/units";
 import TotalWeightContext from "../contexts/TotalWeightContext";
 import UnitContext from "../contexts/UnitContext";
 import RoundingContext from "../contexts/RoundingContext";
 import BarAndCollarContext from "../contexts/BarAndCollarContext";
-import AvailablePlatesContext from "../contexts/AvailablePlatesContext";
+import { useAvailablePlates } from "../contexts/AvailablePlatesContext";
+import { Grid, Container, Typography } from "@material-ui/core";
 
 const BarbellsView = () => {
   const { totalWeight } = useContext(TotalWeightContext);
   const { unit } = useContext(UnitContext);
   const { rounding } = useContext(RoundingContext);
   const { barWeight, collarWeight } = useContext(BarAndCollarContext);
-  const { availablePlatesKg, availablePlatesLbs } = useContext(
-    AvailablePlatesContext
-  );
+  const { availablePlates } = useAvailablePlates();
 
   if (totalWeight === 0) {
     return null;
   }
 
   const getPlates = unit => {
-    return unit === "kg" ? availablePlatesKg : availablePlatesLbs;
+    const plates =
+      unit === "kg"
+        ? availablePlates.availablePlatesKg
+        : availablePlates.availablePlatesLbs;
+    return plates.filter(plate => plate.pairs > 0);
   };
 
   const getSmallestPlate = unit => {
     const plates = getPlates(unit);
-    return plates[plates.length - 1];
+    return plates[plates.length - 1].weight;
   };
 
   const barLoad = weightToBarLoad(
@@ -78,12 +80,12 @@ const BarbellsView = () => {
 
   return (
     <Container>
-      <Row>
-        <Col sm="6">
-          <h2>
+      <Grid container spacing={5}>
+        <Grid item sm={6}>
+          <Typography variant="h5">
             {totalWeight}
             {unit}
-          </h2>
+          </Typography>
           <Barbell
             barLoad={barLoad}
             weight={totalWeight}
@@ -92,17 +94,12 @@ const BarbellsView = () => {
             barWeight={displayWeight(barWeight)}
             collarWeight={collarWeight}
           />
-        </Col>
-        <Col sm="6">
-          <h2>
+        </Grid>
+        <Grid item sm={6}>
+          <Typography variant="h5">
             <span>{displayWeight(convert(totalWeight))}</span>
             <span>{otherUnit}</span>
-          </h2>
-          <h2>
-            <span>Rounded ({rounding}):</span>
-            <span>{plateRound(otherWeight, otherSmallestPlate, rounding)}</span>
-            <span>{otherUnit}</span>
-          </h2>
+          </Typography>
           <Barbell
             barLoad={otherBarLoad}
             weight={otherWeight}
@@ -111,8 +108,13 @@ const BarbellsView = () => {
             barWeight={displayWeight(otherBarWeight)}
             collarWeight={otherCollarWeight}
           />
-        </Col>
-      </Row>
+          <Typography variant="caption">
+            <span>Rounded {rounding}: </span>
+            <span>{plateRound(otherWeight, otherSmallestPlate, rounding)}</span>
+            <span>{otherUnit}</span>
+          </Typography>
+        </Grid>
+      </Grid>
     </Container>
   );
 };

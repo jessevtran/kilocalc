@@ -1,41 +1,30 @@
 import React, { useContext } from "react";
-import { ButtonGroup, Button } from "reactstrap";
+import { Button, ButtonGroup, Container, Typography } from "@material-ui/core";
 import RoundingContext from "../contexts/RoundingContext";
-import styled from "styled-components";
-
-const Label = styled.span`
-  margin-right: 1rem;
-`;
 
 const RoundingInput = () => {
   const { rounding, setRounding } = useContext(RoundingContext);
   return (
-    <div>
-      <Label>Rounding</Label>
-      <ButtonGroup>
+    <Container>
+      <Typography variant="subtitle1">Rounding</Typography>
+      <ButtonGroup color="primary" aria-label="outlined button group">
         <Button
-          color="primary"
           onClick={() => setRounding("nearest")}
           active={rounding === "nearest"}
         >
           nearest
         </Button>
-        <Button
-          color="primary"
-          onClick={() => setRounding("up")}
-          active={rounding === "up"}
-        >
+        <Button onClick={() => setRounding("up")} active={rounding === "up"}>
           up
         </Button>
         <Button
-          color="primary"
           onClick={() => setRounding("down")}
           active={rounding === "down"}
         >
           down
         </Button>
       </ButtonGroup>
-    </div>
+    </Container>
   );
 };
 

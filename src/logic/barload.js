@@ -11,10 +11,12 @@ export const weightToBarLoad = (weight, plates, barWeight, collarWeight) => {
   let sideWeight = (weight - barAndCollarWeight) / 2;
 
   for (let i = 0; i < plates.length; i++) {
-    let plateWeight = plates[i];
-    while (plateWeight <= sideWeight) {
-      barLoad.push(plateWeight);
-      sideWeight -= plateWeight;
+    let plate = plates[i];
+    let pairsAvailable = plate.pairs;
+    while (plate.weight <= sideWeight && pairsAvailable > 0) {
+      barLoad.push(plate.weight);
+      sideWeight -= plate.weight;
+      pairsAvailable--;
     }
   }
 

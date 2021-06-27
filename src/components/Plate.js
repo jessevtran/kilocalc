@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Typography } from "@material-ui/core";
 
 const DefaultPlate = styled.div`
   display: flex;
@@ -141,7 +142,7 @@ const getColor = (weight, unit) => {
 const Plate = ({ weight, unit }) => {
   return (
     <StyledPlate unit={unit} weight={weight}>
-      {weight}
+      <Typography variant="overline">{weight}</Typography>
     </StyledPlate>
   );
 };

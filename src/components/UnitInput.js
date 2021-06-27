@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ButtonGroup, Button, Col } from "reactstrap";
+import { Button, ButtonGroup, Container, Typography } from "@material-ui/core";
 import UnitContext from "../contexts/UnitContext";
 import BarAndCollarContext from "../contexts/BarAndCollarContext";
 
@@ -16,25 +16,18 @@ const UnitInput = () => {
   };
 
   return (
-    <Col>
-      <div>Unit</div>
-      <ButtonGroup>
-        <Button
-          color="primary"
-          onClick={() => updateUnit("kg")}
-          active={unit === "kg"}
-        >
-          kg
+    <Container>
+      <Typography variant="subtitle1">Unit</Typography>
+
+      <ButtonGroup color="primary" aria-label="outlined button group">
+        <Button onClick={() => updateUnit("kg")} active={unit === "kg"}>
+          Kilos
         </Button>
-        <Button
-          color="primary"
-          onClick={() => updateUnit("lbs")}
-          active={unit === "lbs"}
-        >
-          lbs
+        <Button onClick={() => updateUnit("lbs")} active={unit === "lbs"}>
+          Pounds
         </Button>
       </ButtonGroup>
-    </Col>
+    </Container>
   );
 };
 
