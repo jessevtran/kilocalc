@@ -25,7 +25,10 @@ const initialState = {
 const updatePairs = (plates, weight, unit, newPairs) => {
   const plate = plates.filter(plate => plate.weight === weight)[0];
   if (plate) {
-    plate.pairs = Number(newPairs);
+    const newPairsNum = Number(newPairs);
+    if (!isNaN(newPairsNum)) {
+      plate.pairs = Number(newPairs);
+    }
   }
 
   return plates;

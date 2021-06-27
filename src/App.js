@@ -28,13 +28,13 @@ function App() {
             <a href="https://gitlab.com/michaelvessia/kilocalc">
               View the source, file an issue, or make changes
             </a>
-            <div>
-              Want to support more powerlifting software?
-              <a href="https://www.patreon.com/openpowerlifting">
-                {" "}
-                Donate to the cause!
-              </a>
-            </div>
+          </Typography>
+          <Typography variant="body1">
+            Want to support more powerlifting software?
+            <a href="https://www.patreon.com/openpowerlifting">
+              {" "}
+              Donate to the cause!
+            </a>
           </Typography>
         </Container>
       </Footer>

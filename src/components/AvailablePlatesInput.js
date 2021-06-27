@@ -35,7 +35,7 @@ const AvailablePlatesInput = () => {
         <List>
           {plates.map(plate => {
             return (
-              <ListItem divider>
+              <ListItem divider key={plate.weight}>
                 <ListItemText
                   style={{ paddingRight: "1rem" }}
                   primary={`${plate.weight}${unit}`}
